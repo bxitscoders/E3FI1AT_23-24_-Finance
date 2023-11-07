@@ -17,6 +17,7 @@ namespace Finance_App
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// TESTTESTTESTTEST
     /// </summary>
     public partial class MainWindow : Window
     {
