@@ -12,12 +12,41 @@
       <Schema Namespace="DataModel" Alias="Self" d4p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" annotation:UseStrongSpatialTypes="false" xmlns:d4p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DataEntities" annotation:LazyLoadingEnabled="true" ed:Guid="54f96edb-5538-4aeb-ae0a-667de3181aec">
           <EntitySet Name="Users" EntityType="DataModel.User" />
+          <EntitySet Name="Aktiens" EntityType="DataModel.Aktien" />
+          <EntitySet Name="AktienWerts" EntityType="DataModel.AktienWert" />
+          <EntitySet Name="Kontos" EntityType="DataModel.Konto" />
         </EntityContainer>
         <EntityType Name="User" ed:Guid="ad1fee9a-dc41-4ebf-9bb6-52d8230ed41a">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="46a7fe58-d4a2-41a7-8dc6-e9f119a2535e" />
+          <Property Name="Vorname" Type="String" Nullable="false" ed:ValidateRequired="true" ed:Guid="9255d304-3470-465f-8c3e-447aac1cf786" />
+          <Property Name="Nachname" Type="String" ed:ValidateRequired="false" ed:Guid="22f91a3a-6fd4-4435-b457-2ae99ffb4121" />
+          <Property Name="Konto_FK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="aef48e53-efa9-4c67-96bf-5eb863f7a12c" />
+        </EntityType>
+        <EntityType Name="Aktien" ed:Guid="aff67916-e54b-46dc-89cb-1e81a0acd2f5">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="b3a68f5d-3547-4e80-b999-9225cba350e7" />
+          <Property Name="Name" Type="String" Nullable="false" ed:ValidateRequired="true" ed:Guid="d61c906f-d04a-443c-877a-eba88f348e22" />
+        </EntityType>
+        <EntityType Name="AktienWert" ed:Guid="33f07a68-d9e8-480d-8b94-da72f67c169f">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="6da86507-d94e-4279-95ef-42d832b5b9a3" />
+          <Property Name="Wert" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="75b0e032-f2f2-42fb-ae1f-c40f0186994a" />
+          <Property Name="Aktien_FK" Type="Int32" ed:ValidateRequired="false" ed:Guid="f49362f7-49ec-4bd2-98f7-66040ca78e69" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="756e954b-9089-4ce6-a648-4ae1418ddda1" />
+        </EntityType>
+        <EntityType Name="Konto" ed:Guid="dbd1e7d8-441e-439d-b497-7592a9aa3d5e">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="1cc3076f-28aa-4aff-bb0e-8e473c5ede7a" />
+          <Property Name="Guthaben" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="49b4677a-3cdd-4d2b-bc58-d337ca6a3ec3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
