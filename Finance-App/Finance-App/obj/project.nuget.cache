@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "kt6sfJLfxB05QYCWc8aPUMDVP+G+9Bobvm9LOCrBt2YrXkclBa5Z2BWWGYhPcznwgmnTfWLaYH6oD58HMVUuMA==",
+  "dgSpecHash": "m/FTEwKGd2azZCvBSJST1awd1ZkSu9aLxEF/+7Hp40962dRvQT8XQsDI81gEY++8hNRTxya5YE+M9T2wMiHKSA==",
   "success": true,
-  "projectFilePath": "H:\\GIT\\E3FI1AT_23-24_-Finance\\Finance-App\\Finance-App\\Finance-App.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\alt\\Documents\\GitHub\\E3FI1AT_23-24_-Finance\\Finance-App\\Finance-App\\Finance-App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\alt\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\alt\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\alt\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\alt\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
   "logs": []
 }
