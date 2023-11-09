@@ -15,6 +15,8 @@
           <EntitySet Name="Aktiens" EntityType="DataModel.Aktien" />
           <EntitySet Name="AktienWerts" EntityType="DataModel.AktienWert" />
           <EntitySet Name="Kontos" EntityType="DataModel.Konto" />
+          <EntitySet Name="Finanztransaktionens" EntityType="DataModel.Finanztransaktionen" />
+          <EntitySet Name="APIDetails" EntityType="DataModel.APIDetails" />
         </EntityContainer>
         <EntityType Name="User" ed:Guid="ad1fee9a-dc41-4ebf-9bb6-52d8230ed41a">
           <Key>
@@ -48,6 +50,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="1cc3076f-28aa-4aff-bb0e-8e473c5ede7a" />
           <Property Name="Guthaben" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="49b4677a-3cdd-4d2b-bc58-d337ca6a3ec3" />
         </EntityType>
+        <EntityType Name="Finanztransaktionen" ed:Guid="4ba9e197-bc13-4303-bbc6-eef2ac9bc020" />
+        <EntityType Name="APIDetails" ed:Guid="02660866-6b68-4bb1-ad40-9f28fc5b699f" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
