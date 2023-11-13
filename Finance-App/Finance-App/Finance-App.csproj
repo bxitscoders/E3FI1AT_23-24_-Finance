@@ -7,4 +7,32 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="EntityModel\E.Entities.cs" />
+    <Compile Remove="EntityModel\UML.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="EntityModel\UML.edml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DevartEntityDeploy Include="EntityModel\UML.edml">
+      <Generator>DevartEfGenerator</Generator>
+      <LastGenOutput>UML.info</LastGenOutput>
+    </DevartEntityDeploy>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="EntityModel\UML.info">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UML.edml</DependentUpon>
+    </None>
+  </ItemGroup>
+
 </Project>
