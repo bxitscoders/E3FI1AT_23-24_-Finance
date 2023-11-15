@@ -11,6 +11,7 @@
           <EntitySet Name="Finanztransaktionens" EntityType="Model.Store.Finanztransaktionen" store:Type="Tables" Schema="financeapp" Table="Finanztransaktionen" />
           <EntitySet Name="Kontos" EntityType="Model.Store.Konto" store:Type="Tables" Schema="financeapp" Table="Konto" />
           <EntitySet Name="Users" EntityType="Model.Store.User" store:Type="Tables" Schema="financeapp" Table="User" />
+          <EntitySet Name="Besitzs" EntityType="Model.Store.Besitz" store:Type="Tables" Schema="financeapp" Table="Besitz" />
           <AssociationSet Name="FK_User_Konto" Association="Model.Store.FK_User_Konto">
             <End Role="Konto" EntitySet="Kontos" />
             <End Role="User" EntitySet="Users" />
@@ -19,6 +20,14 @@
             <End Role="Aktien" EntitySet="Aktiens" />
             <End Role="Aktienwert" EntitySet="Aktienwerts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Aktien_Besitz" Association="Model.Store.FK_Aktien_Besitz">
+            <End Role="Besitz" EntitySet="Besitzs" />
+            <End Role="Aktien" EntitySet="Aktiens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Besitz_Konto" Association="Model.Store.FK_Besitz_Konto">
+            <End Role="Konto" EntitySet="Kontos" />
+            <End Role="Besitz" EntitySet="Besitzs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Aktien">
           <Key>
@@ -26,6 +35,7 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="BesitzFK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Aktienwert">
           <Key>
@@ -53,6 +63,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Guthaben" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -61,6 +72,15 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Vorname" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="Nachname" Type="varchar" MaxLength="255" />
+          <Property Name="KontoFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Besitz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Anzahl" Type="int" Nullable="false" />
+          <Property Name="AktienFK" Type="int" />
           <Property Name="KontoFK" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_User_Konto">
@@ -87,6 +107,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Aktien_Besitz">
+          <End Role="Besitz" Type="Model.Store.Besitz" Multiplicity="1" />
+          <End Role="Aktien" Type="Model.Store.Aktien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Besitz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Aktien">
+              <PropertyRef Name="BesitzFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Besitz_Konto">
+          <End Role="Konto" Type="Model.Store.Konto" Multiplicity="1" />
+          <End Role="Besitz" Type="Model.Store.Besitz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Besitz">
+              <PropertyRef Name="KontoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -99,6 +143,7 @@
           <EntitySet Name="Finanztransaktionen" EntityType="Model.Finanztransaktionen" />
           <EntitySet Name="Konto" EntityType="Model.Konto" />
           <EntitySet Name="User" EntityType="Model.User" />
+          <EntitySet Name="Besitz" EntityType="Model.Besitz" />
           <AssociationSet Name="FK_Konto_UserSet" Association="Model.FK_Konto_User">
             <End Role="Konto" EntitySet="Konto" />
             <End Role="Users" EntitySet="User" />
@@ -107,6 +152,14 @@
             <End Role="Aktien" EntitySet="Aktien" />
             <End Role="Aktienwerts" EntitySet="Aktienwert" />
           </AssociationSet>
+          <AssociationSet Name="Besitz_AktienSet" Association="Model.Besitz_Aktien">
+            <End Role="Besitz" EntitySet="Besitz" />
+            <End Role="Aktiens" EntitySet="Aktien" />
+          </AssociationSet>
+          <AssociationSet Name="Konto_BesitzSet" Association="Model.Konto_Besitz">
+            <End Role="Konto" EntitySet="Konto" />
+            <End Role="Besitzs" EntitySet="Besitz" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Aktien" ed:Guid="a6bbd2e3-8b4b-4ca7-a12a-c2288b407f37">
           <Key>
@@ -114,7 +167,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="e8f067fa-cf60-441d-ad97-24451a74541c" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="a425a603-f1a5-4044-9fdf-7e5b070690e1" />
+          <Property Name="BesitzFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="10f87660-9dd9-48ee-914c-a6afbe7444af" />
           <NavigationProperty Name="Aktienwerts" Relationship="Model.Aktien_Aktienwert" FromRole="Aktien" ToRole="Aktienwerts" ed:Guid="f2d4b6f1-f648-4bcc-85d2-f2f1f8bb2aad" />
+          <NavigationProperty Name="Besitz" Relationship="Model.Besitz_Aktien" FromRole="Aktiens" ToRole="Besitz" ed:Guid="a1c5c384-b0e1-4a3e-a5cb-334214c0594b" />
         </EntityType>
         <EntityType Name="Aktienwert" ed:Guid="50fea11a-8a7f-411b-96e5-c250c902baa6">
           <Key>
@@ -143,7 +198,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="8a264833-d9f9-4b19-9d11-e3e37da1eb4a" />
+          <Property Name="Guthaben" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="5c35d789-e132-46bf-a77e-bab9c22bb4d7" />
           <NavigationProperty Name="Users" Relationship="Model.FK_Konto_User" FromRole="Konto" ToRole="Users" ed:Guid="3c20ab69-5f13-465a-b032-184538beb3cf" />
+          <NavigationProperty Name="Besitzs" Relationship="Model.Konto_Besitz" FromRole="Konto" ToRole="Besitzs" ed:Guid="0233c105-9a6a-436d-bff2-b98940476d05" />
         </EntityType>
         <EntityType Name="User" ed:Guid="fffae7ea-215e-4718-81a6-d53efbb57fa8">
           <Key>
@@ -154,6 +211,17 @@
           <Property Name="Nachname" Type="String" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="83d016e9-ee01-4138-8f88-74c922d272cf" />
           <Property Name="KontoFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="66cc5cac-a19c-44e2-a637-eaf25380a609" />
           <NavigationProperty Name="Konto" Relationship="Model.FK_Konto_User" FromRole="Users" ToRole="Konto" ed:Guid="063c35f2-f117-4a60-b194-0e3ac24b07a8" />
+        </EntityType>
+        <EntityType Name="Besitz" ed:Guid="4f7604b9-6e55-4caa-a469-5e04334d7436">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="fdbedd8b-c50a-481a-b847-8dff8c5343c3" />
+          <Property Name="Anzahl" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="bba00fcd-bac8-4ac9-8b94-41fe10fd23fc" />
+          <Property Name="AktienFK" Type="Int32" ed:ValidateRequired="false" ed:Guid="9eb0efc4-d6e4-45f2-a431-c4a56fae6b91" />
+          <Property Name="KontoFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="62ad3c1a-0acc-4fd5-ae40-c67d651488ea" />
+          <NavigationProperty Name="Aktiens" Relationship="Model.Besitz_Aktien" FromRole="Besitz" ToRole="Aktiens" ed:Guid="7f9481d6-799d-4aca-a717-a1dbe1d0cb17" />
+          <NavigationProperty Name="Konto" Relationship="Model.Konto_Besitz" FromRole="Besitzs" ToRole="Konto" ed:Guid="aa8aff96-6604-4cfd-bab2-fe6f70e6936b" />
         </EntityType>
         <Association Name="FK_Konto_User" ed:Guid="1a808c7c-47bf-4d72-944b-d8c166f66532">
           <End Role="Konto" Type="Model.Konto" Multiplicity="1" />
@@ -179,6 +247,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Besitz_Aktien" ed:Guid="80de3c4f-ffb9-4050-a9b0-6f7e9cceec91">
+          <End Role="Besitz" Type="Model.Besitz" Multiplicity="1" />
+          <End Role="Aktiens" Type="Model.Aktien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Besitz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Aktiens">
+              <PropertyRef Name="BesitzFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Konto_Besitz" ed:Guid="9bf9e70e-ed5e-44a5-894b-2aaac6b65507">
+          <End Role="Konto" Type="Model.Konto" Multiplicity="1" />
+          <End Role="Besitzs" Type="Model.Besitz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Besitzs">
+              <PropertyRef Name="KontoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -190,6 +282,7 @@
               <MappingFragment StoreEntitySet="Aktiens">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BesitzFK" ColumnName="BesitzFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -221,6 +314,7 @@
             <EntityTypeMapping TypeName="Model.Konto">
               <MappingFragment StoreEntitySet="Kontos">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Guthaben" ColumnName="Guthaben" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -230,6 +324,16 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Vorname" ColumnName="Vorname" />
                 <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="KontoFK" ColumnName="KontoFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Besitz">
+            <EntityTypeMapping TypeName="Model.Besitz">
+              <MappingFragment StoreEntitySet="Besitzs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="AktienFK" ColumnName="AktienFK" />
                 <ScalarProperty Name="KontoFK" ColumnName="KontoFK" />
               </MappingFragment>
             </EntityTypeMapping>
