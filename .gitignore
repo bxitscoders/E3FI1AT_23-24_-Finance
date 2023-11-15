@@ -397,3 +397,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 *.v2
+Finance-App/Finance-App/obj/Debug/netcoreapp3.1/Finance-App.AssemblyInfo.cs
+Finance-App/Finance-App/obj/Debug/netcoreapp3.1/Finance-App.AssemblyInfo.cs
