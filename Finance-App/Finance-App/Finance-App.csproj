@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database\**" />
+    <EmbeddedResource Remove="Database\**" />
+    <None Remove="Database\**" />
+    <Page Remove="Database\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="EntityModel\E.Entities.cs" />
     <Compile Remove="EntityModel\UML.Designer.cs" />
   </ItemGroup>
@@ -17,14 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DevartEntityDeploy Include="EntityModel\UML.edml">
-      <Generator>DevartEfGenerator</Generator>
-      <LastGenOutput>UML.info</LastGenOutput>
-    </DevartEntityDeploy>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

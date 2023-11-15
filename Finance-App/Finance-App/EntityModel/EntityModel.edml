@@ -68,11 +68,13 @@
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="Benutzername" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Vorname" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="Nachname" Type="varchar" MaxLength="255" />
           <Property Name="KontoFK" Type="int" Nullable="false" />
+          <Property Name="Benutzername" Type="varchar" Nullable="false" MaxLength="255" />
         </EntityType>
         <EntityType Name="Besitz">
           <Key>
@@ -205,11 +207,13 @@
         <EntityType Name="User" ed:Guid="fffae7ea-215e-4718-81a6-d53efbb57fa8">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="Benutzername" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="a6afde8e-b2d2-44ca-9b2e-1510b5527c5a" />
           <Property Name="Vorname" Type="String" Nullable="false" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="8296e939-2fa1-431f-9903-559c56974c6f" />
           <Property Name="Nachname" Type="String" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="83d016e9-ee01-4138-8f88-74c922d272cf" />
           <Property Name="KontoFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="66cc5cac-a19c-44e2-a637-eaf25380a609" />
+          <Property Name="Benutzername" Type="String" Nullable="false" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="372f33e8-63c5-40c2-8868-fa6adcca34ac" />
           <NavigationProperty Name="Konto" Relationship="Model.FK_Konto_User" FromRole="Users" ToRole="Konto" ed:Guid="063c35f2-f117-4a60-b194-0e3ac24b07a8" />
         </EntityType>
         <EntityType Name="Besitz" ed:Guid="4f7604b9-6e55-4caa-a469-5e04334d7436">
@@ -325,6 +329,7 @@
                 <ScalarProperty Name="Vorname" ColumnName="Vorname" />
                 <ScalarProperty Name="Nachname" ColumnName="Nachname" />
                 <ScalarProperty Name="KontoFK" ColumnName="KontoFK" />
+                <ScalarProperty Name="Benutzername" ColumnName="Benutzername" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
