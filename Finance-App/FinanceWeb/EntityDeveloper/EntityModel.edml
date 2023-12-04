@@ -1,0 +1,363 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="MySQL" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:devart="http://devart.com/schemas/edml/StorageSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EntitiesStoreContainer">
+          <EntitySet Name="accounts" EntityType="Model.Store.account" store:Type="Tables" Schema="financeapp" Table="account" />
+          <EntitySet Name="apidetails" EntityType="Model.Store.apidetails" store:Type="Tables" Schema="financeapp" Table="apidetails" />
+          <EntitySet Name="financetransactions" EntityType="Model.Store.financetransaction" store:Type="Tables" Schema="financeapp" Table="financetransaction" />
+          <EntitySet Name="possessions" EntityType="Model.Store.possession" store:Type="Tables" Schema="financeapp" Table="possession" />
+          <EntitySet Name="shares" EntityType="Model.Store.shares" store:Type="Tables" Schema="financeapp" Table="shares" />
+          <EntitySet Name="sharevalues" EntityType="Model.Store.sharevalue" store:Type="Tables" Schema="financeapp" Table="sharevalue" />
+          <EntitySet Name="users" EntityType="Model.Store.user" store:Type="Tables" Schema="financeapp" Table="user" />
+          <AssociationSet Name="account_FK" Association="Model.Store.account_FK">
+            <End Role="user" EntitySet="users" />
+            <End Role="account" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="possession_ibfk_1" Association="Model.Store.possession_ibfk_1">
+            <End Role="shares" EntitySet="shares" />
+            <End Role="possession" EntitySet="possessions" />
+          </AssociationSet>
+          <AssociationSet Name="possession_ibfk_2" Association="Model.Store.possession_ibfk_2">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="possession" EntitySet="possessions" />
+          </AssociationSet>
+          <AssociationSet Name="shareValue_ibfk_1" Association="Model.Store.shareValue_ibfk_1">
+            <End Role="shares" EntitySet="shares" />
+            <End Role="sharevalue" EntitySet="sharevalues" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Credit" Type="int" Nullable="false" />
+          <Property Name="UserFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="apidetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="financetransaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="possession">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="AccountFK" Type="int" Nullable="false" />
+          <Property Name="SharesFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="shares">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="255" Collation="utf8mb4_general_ci" />
+        </EntityType>
+        <EntityType Name="sharevalue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="SharesFK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="255" Collation="utf8mb4_general_ci" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" Collation="utf8mb4_general_ci" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="255" Collation="utf8mb4_general_ci" />
+        </EntityType>
+        <Association Name="account_FK">
+          <End Role="user" Type="Model.Store.user" Multiplicity="1" />
+          <End Role="account" Type="Model.Store.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="UserFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="possession_ibfk_1">
+          <End Role="shares" Type="Model.Store.shares" Multiplicity="1" />
+          <End Role="possession" Type="Model.Store.possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shares">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="possession">
+              <PropertyRef Name="SharesFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="possession_ibfk_2">
+          <End Role="account" Type="Model.Store.account" Multiplicity="1" />
+          <End Role="possession" Type="Model.Store.possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="possession">
+              <PropertyRef Name="AccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="shareValue_ibfk_1">
+          <End Role="shares" Type="Model.Store.shares" Multiplicity="1" />
+          <End Role="sharevalue" Type="Model.Store.sharevalue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shares">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="sharevalue">
+              <PropertyRef Name="SharesFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" d4p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" annotation:UseStrongSpatialTypes="false" xmlns:d4p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true" ed:Guid="d4177d53-a0c9-487f-97c5-37c659f47779">
+          <EntitySet Name="Account" EntityType="Model.Account" />
+          <EntitySet Name="Apidetails" EntityType="Model.Apidetails" />
+          <EntitySet Name="Financetransaction" EntityType="Model.Financetransaction" />
+          <EntitySet Name="Possession" EntityType="Model.Possession" />
+          <EntitySet Name="Shares" EntityType="Model.Shares" />
+          <EntitySet Name="Sharevalue" EntityType="Model.Sharevalue" />
+          <EntitySet Name="User" EntityType="Model.User" />
+          <AssociationSet Name="account_FKSet" Association="Model.account_FK">
+            <End Role="User" EntitySet="User" />
+            <End Role="Accounts" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="possession_ibfk_1Set" Association="Model.possession_ibfk_1">
+            <End Role="Shares" EntitySet="Shares" />
+            <End Role="Possessions" EntitySet="Possession" />
+          </AssociationSet>
+          <AssociationSet Name="possession_ibfk_2Set" Association="Model.possession_ibfk_2">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Possessions" EntitySet="Possession" />
+          </AssociationSet>
+          <AssociationSet Name="shareValue_ibfk_1Set" Association="Model.shareValue_ibfk_1">
+            <End Role="Shares" EntitySet="Shares" />
+            <End Role="Sharevalues" EntitySet="Sharevalue" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account" ed:Guid="05739bbd-22aa-4e2a-9bc6-7b49e051ff07">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="c4b93329-6887-450e-9e88-d0264985011b" />
+          <Property Name="Credit" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="851982e9-ed30-464b-815d-02f44d732348" />
+          <Property Name="UserFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d357a303-3cbb-47d2-b19f-a8fca54206e6" />
+          <NavigationProperty Name="User" Relationship="Model.account_FK" FromRole="Accounts" ToRole="User" ed:Guid="75f32498-2a3e-47d6-90ab-cfe524533a37" />
+          <NavigationProperty Name="Possessions" Relationship="Model.possession_ibfk_2" FromRole="Account" ToRole="Possessions" ed:Guid="34439185-41ad-46e0-bf31-eccb139eaefa" />
+        </EntityType>
+        <EntityType Name="Apidetails" ed:Guid="20b41e0d-cbe1-4734-bbe5-b25970bd8e3a">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="9e0d7427-4139-4eaf-932a-6b0538653b48" />
+        </EntityType>
+        <EntityType Name="Financetransaction" ed:Guid="c1d200e5-3c65-49ce-9dc6-5ea1b07f10a5">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="7d86f9b4-211a-460b-9727-e7d209174dd0" />
+        </EntityType>
+        <EntityType Name="Possession" ed:Guid="88ec7ddc-6e84-4aec-a67a-0e8b5b72bcc1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="40deee92-d2f5-4a27-b785-d8751db37bfa" />
+          <Property Name="Number" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="9351f572-6594-42da-b283-891592a97382" />
+          <Property Name="AccountFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="c22f7c1d-cb64-472e-8b7c-fc3d95ea0c81" />
+          <Property Name="SharesFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="ddf1f73a-54fe-4bc4-9e35-4794dc3c496d" />
+          <NavigationProperty Name="Shares" Relationship="Model.possession_ibfk_1" FromRole="Possessions" ToRole="Shares" ed:Guid="25cecdc1-57a7-49da-8254-cf82a607fd0d" />
+          <NavigationProperty Name="Account" Relationship="Model.possession_ibfk_2" FromRole="Possessions" ToRole="Account" ed:Guid="8acb503c-6ab4-4102-a9a2-4f278d27c5e7" />
+        </EntityType>
+        <EntityType Name="Shares" ed:Guid="fe928d6c-fd64-49b2-b550-7e47fdc94a1f">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="4857e970-7f29-4089-964c-dc0abe20c7dc" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="4b150ba5-6179-4c1d-8f84-4b1ca81341e9" />
+          <NavigationProperty Name="Possessions" Relationship="Model.possession_ibfk_1" FromRole="Shares" ToRole="Possessions" ed:Guid="122e63cf-fc5d-4a92-aba9-4083b610a1f2" />
+          <NavigationProperty Name="Sharevalues" Relationship="Model.shareValue_ibfk_1" FromRole="Shares" ToRole="Sharevalues" ed:Guid="08d2562e-057d-44a0-a6c1-57514dcb5927" />
+        </EntityType>
+        <EntityType Name="Sharevalue" ed:Guid="ab94098e-3588-423c-8bf4-0f01e3431692">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="18e73b5a-0198-42ce-9a27-27293abb045e" />
+          <Property Name="Value" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="896c4353-1f79-4d64-8584-c82aa5f65b47" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f82b5a51-c348-4bb0-a17f-405ab28976cb" />
+          <Property Name="SharesFK" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="666b8a3e-6b3d-4893-94bf-a73b0eb80e51" />
+          <NavigationProperty Name="Shares" Relationship="Model.shareValue_ibfk_1" FromRole="Sharevalues" ToRole="Shares" ed:Guid="85a7cd8c-14e3-4289-a212-0d05472da03e" />
+        </EntityType>
+        <EntityType Name="User" ed:Guid="01e5d0f8-3fef-430a-97cc-46029fe4af6d">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="240da9df-6979-4ff5-9aae-bd0daa2468d6" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="c073be29-9f23-4116-8b51-9813ab403728" />
+          <Property Name="LastName" Type="String" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="f1f42844-2da1-4c6f-8b04-d7f23db2993c" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="cc7d507f-751f-4608-9e32-15fc77f5dd3b" />
+          <NavigationProperty Name="Accounts" Relationship="Model.account_FK" FromRole="User" ToRole="Accounts" ed:Guid="2eb7b50e-d517-46d9-8fc4-016a215e59bb" />
+        </EntityType>
+        <Association Name="account_FK" ed:Guid="0278d28f-cb03-48b4-ad77-04347fe56bcd">
+          <End Role="User" Type="Model.User" Multiplicity="1" />
+          <End Role="Accounts" Type="Model.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="UserFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="possession_ibfk_1" ed:Guid="12b161be-9fc0-4ef9-889e-e7dc73a9ff26">
+          <End Role="Shares" Type="Model.Shares" Multiplicity="1" />
+          <End Role="Possessions" Type="Model.Possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shares">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Possessions">
+              <PropertyRef Name="SharesFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="possession_ibfk_2" ed:Guid="9da2d5ea-b5cb-4b98-b692-fb4dde643ef2">
+          <End Role="Account" Type="Model.Account" Multiplicity="1" />
+          <End Role="Possessions" Type="Model.Possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Possessions">
+              <PropertyRef Name="AccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="shareValue_ibfk_1" ed:Guid="5e98a0f2-01dd-47e0-aa64-d36da16a1ad5">
+          <End Role="Shares" Type="Model.Shares" Multiplicity="1" />
+          <End Role="Sharevalues" Type="Model.Sharevalue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shares">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sharevalues">
+              <PropertyRef Name="SharesFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- MSL content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="Model.Account">
+              <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="UserFK" ColumnName="UserFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Apidetails">
+            <EntityTypeMapping TypeName="Model.Apidetails">
+              <MappingFragment StoreEntitySet="apidetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Financetransaction">
+            <EntityTypeMapping TypeName="Model.Financetransaction">
+              <MappingFragment StoreEntitySet="financetransactions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Possession">
+            <EntityTypeMapping TypeName="Model.Possession">
+              <MappingFragment StoreEntitySet="possessions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="AccountFK" ColumnName="AccountFK" />
+                <ScalarProperty Name="SharesFK" ColumnName="SharesFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shares">
+            <EntityTypeMapping TypeName="Model.Shares">
+              <MappingFragment StoreEntitySet="shares">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sharevalue">
+            <EntityTypeMapping TypeName="Model.Sharevalue">
+              <MappingFragment StoreEntitySet="sharevalues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="SharesFK" ColumnName="SharesFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <edmx:Diagrams>
+      <Diagram Name="Main" />
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

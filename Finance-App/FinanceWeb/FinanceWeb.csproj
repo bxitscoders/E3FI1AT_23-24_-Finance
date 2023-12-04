@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\Aktien.cs" />
+    <Compile Remove="Entities\Aktienwert.cs" />
+    <Compile Remove="Entities\Besitz.cs" />
+    <Compile Remove="Entities\EntityModel.Aktien.cs" />
+    <Compile Remove="Entities\EntityModel.Aktienwert.cs" />
+    <Compile Remove="Entities\EntityModel.Apidetails.cs" />
+    <Compile Remove="Entities\EntityModel.Besitz.cs" />
+    <Compile Remove="Entities\EntityModel.Finanztransaktionen.cs" />
+    <Compile Remove="Entities\EntityModel.Konto.cs" />
+    <Compile Remove="Entities\EntityModel.User.cs" />
+    <Compile Remove="Entities\Finanztransaktionen.cs" />
+    <Compile Remove="Entities\Konto.cs" />
+    <Compile Remove="EntityDeveloper\EntityModel.Entities.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="EntityDeveloper\EntityModel.edml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="EntityDeveloper\EntityModel.info">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EntityModel.edml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <DevartEntityDeploy Include="EntityDeveloper\EntityModel.edml">
+      <Generator>DevartEfGenerator</Generator>
+      <LastGenOutput>EntityModel.info</LastGenOutput>
+    </DevartEntityDeploy>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="MySqlConnector" Version="2.3.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="EntityDeveloper\EntityModel.info">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EntityModel.edml</DependentUpon>
+    </None>
+  </ItemGroup>
+
+</Project>
