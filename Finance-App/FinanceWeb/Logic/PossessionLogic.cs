@@ -13,7 +13,7 @@ namespace FinanceWeb.Logic
 		/// <returns>last inserted id</returns>
 		public long CreatePossession(int number, Shares shares)
 		{
-			string sql = $"Inster Into {ClassContants.besitz} (Number, KontoFK, AktienFK) Values ({number}, {1}, {shares.ID})";
+			string sql = $"Inster Into {ClassContants.possession} (Number, AccountFK, SharesFK) Values ({number}, {1}, {shares.ID})";
 			return GetDataReader(sql).LastInsertedId;
 		}
 	}

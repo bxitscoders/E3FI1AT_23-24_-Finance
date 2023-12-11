@@ -24,7 +24,7 @@ namespace FinanceWeb.Logic
 		/// <returns>last inserted id</returns>
 		public long CreateAccount(int userId)
 		{
-			string sql = $"Insert Into {ClassContants.konto} (Credit, UserFK) Values ({KontoDefault.Credit}, {userId})";
+			string sql = $"Insert Into {ClassContants.account} (Credit, UserFK) Values ({AccountDefault.Credit}, {userId})";
 			return GetDataReader(sql).LastInsertedId;
 		}
 
@@ -34,7 +34,7 @@ namespace FinanceWeb.Logic
 		/// <param name="newCredit"></param>
 		public void UpdateKonto(int newCredit)
 		{
-			string sql = $"Update {ClassContants.konto} Set Credit = {newCredit}";
+			string sql = $"Update {ClassContants.account} Set Credit = {newCredit}";
 			GetDataReader(sql);
 		}
 	}

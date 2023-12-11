@@ -12,7 +12,7 @@ namespace FinanceWeb.Logic
 		/// <returns>last inserted id</returns>
 		public long CreateShareValue(Sharevalue sharesValue)
 		{
-			string sql = $"Insert Into {ClassContants.sharesValue} (Value, TimeStamp, AktienFK) Values ({sharesValue.Value}, {sharesValue.TimeStamp}, {sharesValue.SharesFK});";
+			string sql = $"Insert Into {ClassContants.sharesValue} (Value, TimeStamp, SharesFK) Values ({sharesValue.Value}, {sharesValue.TimeStamp}, {sharesValue.SharesFK});";
 			return GetDataReader(sql).LastInsertedId;
 		}
 	}
