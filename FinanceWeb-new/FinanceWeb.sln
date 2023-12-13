@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.7.34221.43
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceWeb", "FinanceWeb\FinanceWeb.csproj", "{0EFAD2ED-758B-4C2E-AE54-2808FD939A59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E2DE863E-342A-4290-8702-CF3B42D818BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{0D38E5D3-5397-4A27-824E-B33BEBF8DDB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{0EFAD2ED-758B-4C2E-AE54-2808FD939A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EFAD2ED-758B-4C2E-AE54-2808FD939A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EFAD2ED-758B-4C2E-AE54-2808FD939A59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2DE863E-342A-4290-8702-CF3B42D818BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2DE863E-342A-4290-8702-CF3B42D818BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2DE863E-342A-4290-8702-CF3B42D818BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2DE863E-342A-4290-8702-CF3B42D818BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D38E5D3-5397-4A27-824E-B33BEBF8DDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D38E5D3-5397-4A27-824E-B33BEBF8DDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D38E5D3-5397-4A27-824E-B33BEBF8DDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D38E5D3-5397-4A27-824E-B33BEBF8DDB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
