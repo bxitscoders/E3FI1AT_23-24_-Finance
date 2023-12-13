@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FinanceWeb.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
 
 namespace FinanceWeb.Logic
