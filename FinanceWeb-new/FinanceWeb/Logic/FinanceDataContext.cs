@@ -10,6 +10,8 @@ namespace FinanceWeb.Logic
 
         public DbSet<User> User { get; set; }
         public DbSet<Account> Account { get; set; }
+        public DbSet<Shares> Shares { get; set; }
+        public DbSet<ShareValue> ShareValues { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
