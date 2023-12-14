@@ -399,3 +399,4 @@ FodyWeavers.xsd
 *.v2
 Finance-App/Finance-App/obj/Debug/netcoreapp3.1/Finance-App.AssemblyInfo.cs
 Finance-App/Finance-App/obj/Debug/netcoreapp3.1/Finance-App.AssemblyInfo.cs
+FinanceWeb-new/UnitTestProject1/Properties/AssemblyInfo.cs

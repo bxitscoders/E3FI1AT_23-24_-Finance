@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FinanceWeb.Logic;
 
 namespace UnitTests
 {
@@ -8,6 +9,8 @@ namespace UnitTests
         [TestMethod]
         public void TestMethod1()
         {
+            DatabaseLogic databaseLogic = new DatabaseLogic();
+            databaseLogic.Connection();
         }
     }
 }
