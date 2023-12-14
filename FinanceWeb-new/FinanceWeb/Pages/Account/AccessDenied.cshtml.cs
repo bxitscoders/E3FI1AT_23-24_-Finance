@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FinanceWeb.Pages
+namespace FinanceWeb.Pages.Account
 {
-    public class ProtectedPageIndex : PageModel
+    public class AccessDeniedModel : PageModel
     {
         public void OnGet()
         {
