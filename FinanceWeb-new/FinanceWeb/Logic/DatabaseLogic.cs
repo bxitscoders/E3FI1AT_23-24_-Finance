@@ -1,4 +1,6 @@
 ﻿using FinanceWeb.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
 
 namespace FinanceWeb.Logic
@@ -9,7 +11,7 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                context.User.Add(new User { UserId = 1, FirstName = "ralf" , LastName = "", UserName= "ralf"});
+                var user = context.User.Include(u => u.Accounts);
                 context.SaveChanges();
             }
         }

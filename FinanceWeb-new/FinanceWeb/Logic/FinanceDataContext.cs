@@ -6,7 +6,7 @@ namespace FinanceWeb.Logic
 {
     public class FinanceDataContext : DbContext
     {
-        static readonly string connectionString = "server=localhost;user=root;database=financeweb;password=;";
+        static readonly string connectionString = "server=localhost;user=root;database=financeapp;password=;";
 
         public DbSet<User> User { get; set; }
         public DbSet<Account> Account { get; set; }

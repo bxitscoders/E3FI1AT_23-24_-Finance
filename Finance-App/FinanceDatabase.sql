@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 04. Dez 2023 um 12:11
+-- Erstellungszeit: 14. Dez 2023 um 11:46
 -- Server-Version: 10.4.28-MariaDB
 -- PHP-Version: 8.2.4
 
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `account` (
   `ID` int(11) NOT NULL,
   `Credit` int(11) NOT NULL,
-  `UserFK` int(11) NOT NULL
+  `UserID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Daten für Tabelle `account`
 --
 
-INSERT INTO `account` (`ID`, `Credit`, `UserFK`) VALUES
+INSERT INTO `account` (`ID`, `Credit`, `UserID`) VALUES
 (2, 10000, 14);
 
 -- --------------------------------------------------------
@@ -69,8 +69,8 @@ CREATE TABLE `financetransaction` (
 CREATE TABLE `possession` (
   `ID` int(11) NOT NULL,
   `Number` int(11) NOT NULL,
-  `AccountFK` int(11) NOT NULL,
-  `SharesFK` int(11) NOT NULL
+  `AccountID` int(11) NOT NULL,
+  `SharesID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE `sharevalue` (
   `ID` int(11) NOT NULL,
   `Value` int(11) NOT NULL,
   `TimeStamp` datetime NOT NULL,
-  `SharesFK` int(11) NOT NULL
+  `SharesID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -104,7 +104,7 @@ CREATE TABLE `sharevalue` (
 --
 
 CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
   `FirstName` varchar(255) NOT NULL,
   `LastName` varchar(255) DEFAULT NULL,
   `UserName` varchar(255) NOT NULL
@@ -114,7 +114,7 @@ CREATE TABLE `user` (
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`ID`, `FirstName`, `LastName`, `UserName`) VALUES
+INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`) VALUES
 (1, 'max', 'musternmann', 'max1'),
 (2, 'max', NULL, 'max2'),
 (7, 'Peter', 'Lustig', 'Peter'),
@@ -132,7 +132,7 @@ INSERT INTO `user` (`ID`, `FirstName`, `LastName`, `UserName`) VALUES
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `account_FK` (`UserFK`);
+  ADD KEY `account_FK` (`UserID`);
 
 --
 -- Indizes für die Tabelle `apidetails`
@@ -151,8 +151,8 @@ ALTER TABLE `financetransaction`
 --
 ALTER TABLE `possession`
   ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `unique_AccountFK_SharesFK` (`AccountFK`,`SharesFK`),
-  ADD KEY `SharesFK` (`SharesFK`);
+  ADD UNIQUE KEY `unique_AccountFK_SharesFK` (`AccountID`,`SharesID`),
+  ADD KEY `SharesFK` (`SharesID`);
 
 --
 -- Indizes für die Tabelle `shares`
@@ -165,13 +165,13 @@ ALTER TABLE `shares`
 --
 ALTER TABLE `sharevalue`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `SharesFK` (`SharesFK`);
+  ADD KEY `SharesFK` (`SharesID`);
 
 --
 -- Indizes für die Tabelle `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`UserID`),
   ADD UNIQUE KEY `unique_username` (`UserName`);
 
 --
@@ -218,7 +218,7 @@ ALTER TABLE `sharevalue`
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints der exportierten Tabellen
@@ -228,20 +228,20 @@ ALTER TABLE `user`
 -- Constraints der Tabelle `account`
 --
 ALTER TABLE `account`
-  ADD CONSTRAINT `account_FK` FOREIGN KEY (`UserFK`) REFERENCES `user` (`ID`);
+  ADD CONSTRAINT `account_FK` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
 -- Constraints der Tabelle `possession`
 --
 ALTER TABLE `possession`
-  ADD CONSTRAINT `possession_ibfk_1` FOREIGN KEY (`SharesFK`) REFERENCES `shares` (`ID`),
-  ADD CONSTRAINT `possession_ibfk_2` FOREIGN KEY (`AccountFK`) REFERENCES `account` (`ID`);
+  ADD CONSTRAINT `possession_ibfk_1` FOREIGN KEY (`SharesID`) REFERENCES `shares` (`ID`),
+  ADD CONSTRAINT `possession_ibfk_2` FOREIGN KEY (`AccountID`) REFERENCES `account` (`ID`);
 
 --
 -- Constraints der Tabelle `sharevalue`
 --
 ALTER TABLE `sharevalue`
-  ADD CONSTRAINT `shareValue_ibfk_1` FOREIGN KEY (`SharesFK`) REFERENCES `shares` (`ID`);
+  ADD CONSTRAINT `shareValue_ibfk_1` FOREIGN KEY (`SharesID`) REFERENCES `shares` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
