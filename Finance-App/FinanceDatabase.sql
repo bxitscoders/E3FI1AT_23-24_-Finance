@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 14. Dez 2023 um 11:46
+-- Erstellungszeit: 14. Dez 2023 um 12:38
 -- Server-Version: 10.4.28-MariaDB
 -- PHP-Version: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `financeapp`
 --
+CREATE DATABASE IF NOT EXISTS `financeapp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `financeapp`;
 
 -- --------------------------------------------------------
 
@@ -104,7 +106,7 @@ CREATE TABLE `sharevalue` (
 --
 
 CREATE TABLE `user` (
-  `UserID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
   `FirstName` varchar(255) NOT NULL,
   `LastName` varchar(255) DEFAULT NULL,
   `UserName` varchar(255) NOT NULL
@@ -114,7 +116,7 @@ CREATE TABLE `user` (
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`) VALUES
+INSERT INTO `user` (`ID`, `FirstName`, `LastName`, `UserName`) VALUES
 (1, 'max', 'musternmann', 'max1'),
 (2, 'max', NULL, 'max2'),
 (7, 'Peter', 'Lustig', 'Peter'),
@@ -171,7 +173,7 @@ ALTER TABLE `sharevalue`
 -- Indizes für die Tabelle `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`UserID`),
+  ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `unique_username` (`UserName`);
 
 --
@@ -218,7 +220,7 @@ ALTER TABLE `sharevalue`
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints der exportierten Tabellen
@@ -228,7 +230,7 @@ ALTER TABLE `user`
 -- Constraints der Tabelle `account`
 --
 ALTER TABLE `account`
-  ADD CONSTRAINT `account_FK` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `account_FK` FOREIGN KEY (`UserID`) REFERENCES `user` (`ID`);
 
 --
 -- Constraints der Tabelle `possession`

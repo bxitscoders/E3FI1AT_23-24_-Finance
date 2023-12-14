@@ -5,14 +5,13 @@ using System.Linq;
 
 namespace FinanceWeb.Logic
 {
-    public class DatabaseLogic
+    public static class DatabaseLogic
     {
-        public void Connection()
+        public static FinanceDataContext GetContext()
         {
             using (var context = new FinanceDataContext())
             {
-                var user = context.User.Include(u => u.Accounts);
-                context.SaveChanges();
+                return context;
             }
         }
     }
