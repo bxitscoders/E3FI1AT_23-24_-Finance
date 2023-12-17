@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FinanceWeb.Logic
 {
-    public class PossessionLogic
+    public static class PossessionLogic
     {
         public static void CreatePossession(Possession possession)
         {
