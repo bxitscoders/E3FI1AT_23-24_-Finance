@@ -47,6 +47,7 @@ namespace FinanceWeb
             services.AddRazorPages(options =>
             {
                 options.Conventions.AllowAnonymousToPage("/Account/Login");
+                options.Conventions.AllowAnonymousToPage("/Account/SignUp");
                 options.Conventions.AllowAnonymousToPage("/Account/AccessDenied");
             });
         }
