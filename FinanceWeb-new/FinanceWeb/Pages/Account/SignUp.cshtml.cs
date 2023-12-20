@@ -38,7 +38,7 @@ namespace FinanceWeb.Pages.Account
             _context.User.Add(User);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Login");
         }
     }
 }
