@@ -1,10 +1,80 @@
-﻿@page
-@model IndexModel
+﻿
+@page
+@model FinanceWeb.Pages.ProtectedPageIndex
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Protected Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Finance Website</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <style>
+            /* Your existing CSS goes here */
+        </style>
+    </head>
+    <body>
+        <header class="section">
+            <div class="container">
+                <h1 class="display-4">Finance Website</h1>
+                <p class="lead">Empowering Your Financial Journey</p>
+            </div>
+        </header>
+
+        <main class="section">
+            <div class="container">
+                <section class="mb-5">
+                    <h2 class="mb-3">Featured Services</h2>
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="window">
+                                <h3>Investment Planning</h3>
+                                <p>Explore our investment options to secure your financial future.</p>
+                                <a href="#" class="button">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="window">
+                                <h3>Personal Loans</h3>
+                                <p>Get flexible and affordable personal loans tailored to your needs.</p>
+                                <a href="#" class="button">Apply Now</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="window">
+                                <h3>Financial Education</h3>
+                                <p>Access resources and tools for improving your financial literacy.</p>
+                                <a href="#" class="button">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-5">
+                    <h2 class="mb-3">Contact Us</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" class="form-control textfield" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" class="form-control textfield" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control textfield" id="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="button">Submit</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <footer class="section">
+            <div class="container">
+                <p>&copy; 2023 Finance Website. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>

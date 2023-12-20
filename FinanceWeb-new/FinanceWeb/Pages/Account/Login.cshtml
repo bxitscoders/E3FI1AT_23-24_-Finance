@@ -1,0 +1,15 @@
+﻿@page
+@model FinanceWeb.Pages.Account.LoginModel
+@{ ViewData["Title"] = "Login"; }
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <label asp-for="Input.Email"></label>
+    <input asp-for="Input.Email" />
+
+    <label asp-for="Input.Password"></label>
+    <input asp-for="Input.Password" type="password" />
+
+    <button type="submit">Log in</button>
+</form>
