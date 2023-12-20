@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace FinanceWeb.Pages.Account
 {
-
+    
     public class LoginModel : PageModel
     {
-
+        
         private readonly ILogger<LoginModel> _logger;
 
         [BindProperty]
@@ -52,7 +52,7 @@ namespace FinanceWeb.Pages.Account
 
                 return RedirectToPage("/Index");
             }
-
+            ModelState.AddModelError(string.Empty, "Invalid email or password.");
             return Page();
         }
     }

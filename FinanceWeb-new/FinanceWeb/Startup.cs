@@ -27,13 +27,14 @@ namespace FinanceWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie(options =>
-        {
-            options.LoginPath = "/Account/Login"; // Set the login path
-            options.AccessDeniedPath = "/Account/AccessDenied"; // Set the Access Denied path
-        });
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.AccessDeniedPath = "/Account/AccessDenied";
+                });
 
-             services.AddAuthorization(options =>
+
+            services.AddAuthorization(options =>
              {
                  options.FallbackPolicy = new AuthorizationPolicyBuilder()
                      .RequireAuthenticatedUser()
@@ -43,11 +44,12 @@ namespace FinanceWeb
 
             services.AddControllersWithViews();
             services.AddRouting();
-            
+            services.AddMvc();
             services.AddRazorPages(options =>
             {
                 options.Conventions.AllowAnonymousToPage("/Account/Login");
                 options.Conventions.AllowAnonymousToPage("/Account/AccessDenied");
+                //options.Conventions.AllowAnonymousToPage("/Index");
             });
         }
 
