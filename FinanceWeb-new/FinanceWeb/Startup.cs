@@ -10,7 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-
+using FinanceWeb.Logic;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinanceWeb
 {
@@ -48,9 +49,15 @@ namespace FinanceWeb
             services.AddRazorPages(options =>
             {
                 options.Conventions.AllowAnonymousToPage("/Account/Login");
+                options.Conventions.AllowAnonymousToPage("/Account/SignUp");
                 options.Conventions.AllowAnonymousToPage("/Account/AccessDenied");
                 //options.Conventions.AllowAnonymousToPage("/Index");
             });
+
+            var connectionString = "server=localhost;user=root;database=financeapp;password=;";
+            services.AddDbContext<FinanceDataContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

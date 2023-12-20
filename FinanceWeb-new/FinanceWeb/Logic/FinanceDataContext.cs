@@ -6,7 +6,10 @@ namespace FinanceWeb.Logic
 {
     public class FinanceDataContext : DbContext
     {
-        static readonly string connectionString = "server=localhost;user=root;database=financeapp;password=;";
+        const string connectionString = "server=localhost;user=root;database=financeapp;password=;";
+
+        public FinanceDataContext() { }
+        public FinanceDataContext(DbContextOptions<FinanceDataContext> options) : base(options) { }
 
         public DbSet<User> User { get; set; }
         public DbSet<Account> Account { get; set; }
@@ -19,6 +22,11 @@ namespace FinanceWeb.Logic
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().ToTable("User");
         }
     }
 }
