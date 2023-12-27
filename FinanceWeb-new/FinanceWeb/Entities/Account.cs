@@ -11,6 +11,7 @@ namespace FinanceWeb.Entities
         public int ID { get; set; }
         public int Credit { get; set; }
         public int UserID { get; set; }
+        public User User { get; set; }
         public ICollection<Possession> Possessions { get; set; }
     }
 }

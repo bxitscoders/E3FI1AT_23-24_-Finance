@@ -34,7 +34,9 @@ namespace FinanceWeb.Pages.Account
             {
                 return Page();
             }
-
+           
+            Entities.Account account = new Entities.Account() { Credit = 10000};
+            User.Accounts.Add(account);
             _context.User.Add(User);
             await _context.SaveChangesAsync();
 
