@@ -49,6 +49,7 @@ namespace FinanceWeb
             {
                 options.Conventions.AllowAnonymousToPage("/Account/Login");
                 options.Conventions.AllowAnonymousToPage("/Account/SignUp");
+                options.Conventions.AllowAnonymousToPage("/Account/HomeWindow");
                 options.Conventions.AllowAnonymousToPage("/Account/AccessDenied");
             });
 
