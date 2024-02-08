@@ -8,6 +8,6 @@ namespace FinanceWeb.Entities
         public int Number { get; set; }
         public int AccountID { get; set; }
         public int SharesID { get; set; }
-        public ICollection<Shares> Shares { get; set; }
+        public Shares Shares { get; set; }
     }
 }

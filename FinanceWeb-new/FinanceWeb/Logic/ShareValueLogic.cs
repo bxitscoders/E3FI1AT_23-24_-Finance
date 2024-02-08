@@ -9,7 +9,7 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                context.ShareValues.Add(sharesValue);
+                context.ShareValue.Add(sharesValue);
                 context.SaveChanges();
             }
         }
@@ -18,7 +18,7 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.ShareValues.ToList();
+                var entity = context.ShareValue.ToList();
                 context.SaveChanges();
                 return entity.FirstOrDefault();
             }
@@ -28,7 +28,7 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                var entitys = context.ShareValues.FirstOrDefault(sv => sv.ID == shareValue.ID);
+                var entitys = context.ShareValue.FirstOrDefault(sv => sv.ID == shareValue.ID);
                 entitys.Value = shareValue.Value;
                 entitys.Timestamp = shareValue.Timestamp;
                 context.SaveChanges();

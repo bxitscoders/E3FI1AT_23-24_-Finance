@@ -9,6 +9,5 @@ namespace FinanceWeb.Entities
         public int Value { get; set; }
         public DateTime Timestamp { get; set; }
         public int SharesID { get; set; }
-        public Shares Shares { get; set; }
     }
 }
