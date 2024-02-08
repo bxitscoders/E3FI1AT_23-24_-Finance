@@ -24,7 +24,7 @@ namespace UnitTests.DatabaseTests
         public void GetAccountTest()
         {
             int id = 1;
-            var entity = AccountLogic.GetAccountById(id);
+            var entity = AccountLogic.GetAccountByUserId(id);
             Assert.IsTrue(entity.ID == id);
         }
 
@@ -33,7 +33,7 @@ namespace UnitTests.DatabaseTests
         {
             Account account = new Account() { ID = 1, Credit = 20000, UserID = 1 };
             AccountLogic.UpdateAccount(account);
-            var entity =AccountLogic.GetAccountById(account.ID);
+            var entity =AccountLogic.GetAccountByUserId(account.ID);
             Assert.IsTrue(account.Credit == entity.Credit);
         }
 
@@ -42,7 +42,7 @@ namespace UnitTests.DatabaseTests
         {
             Account account = new Account() { ID = 1, Credit = 20000, UserID = 1 };
             AccountLogic.DeleteAccount(account);
-            var entity = AccountLogic.GetAccountById(account.ID);
+            var entity = AccountLogic.GetAccountByUserId(account.ID);
             Assert.IsNull(entity);
         }
     }

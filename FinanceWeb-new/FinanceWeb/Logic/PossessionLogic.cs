@@ -1,6 +1,7 @@
 ﻿using FinanceWeb.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FinanceWeb.Logic
 {
@@ -15,13 +16,13 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static Possession GetPossessionById(int id)
+        public static List<Possession> GetPossessionByAccountId(int id)
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Possession.Include(s => s.Shares).ToList();
+                var entity = context.Possession.Where(possession => possession.AccountID == id).Include(s => s.Shares).ThenInclude(s => s.ShareValue).ToList();
                 context.SaveChanges();
-                return entity.FirstOrDefault();
+                return entity;
             }
         }
 

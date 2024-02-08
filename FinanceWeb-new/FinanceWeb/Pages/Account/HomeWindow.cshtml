@@ -4,4 +4,47 @@
     ViewData["Title"] = "Home";
 }
 
-<h1>Home</h1>
+<h1>Willkommen</h1>
+<br />
+<div>
+    <b>Guthaben:</b>
+    <div>
+        <label>@Model.Account.Credit €</label>
+    </div>
+</div>
+<div style="margin-top: 50px">
+    <b>Besitz:</b>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Anzahl</th>
+            <th>Wert</th>
+        </tr>
+        @foreach (var possession in Model.Account.Possessions)
+        {
+            <tr>
+                <td>@possession.Shares.Name</td>
+                <td>@possession.Number</td>
+                <td>@(@possession.Shares.ShareValue.First().Value * @possession.Number)€</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
