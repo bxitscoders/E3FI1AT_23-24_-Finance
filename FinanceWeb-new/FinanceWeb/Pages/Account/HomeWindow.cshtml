@@ -25,16 +25,7 @@
             <tr>
                 <td>@possession.Shares.Name</td>
                 <td>@possession.Number</td>
-                <td>@(@possession.Shares.ShareValue.First().Value * @possession.Number)€
-                    <div class="overflow-menu">
-                        <button class="menu-btn">&#8942;</button>
-                        <div class="menu-content">
-                            <a href="#">Item 1</a>
-                            <a href="#">Item 2</a>
-                            <a href="#">Item 3</a>
-                        </div>
-                    </div>
-                </td>
+                <td>@(@possession.Shares.ShareValue.First().Value * @possession.Number)€</td>
             </tr>
         }
     </table>
@@ -56,36 +47,4 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
-
-    .overflow-menu {
-        
-        display: inline-block;
-    }
-
-    .menu-btn {
-        background-color: transparent;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    .menu-content {
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        min-width: 160px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        z-index: 1;
-    }
-
-        .menu-content a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #333;
-        }
-
-            .menu-content a:hover {
-                background-color: #f5f5f5;
-            }
 </style>
