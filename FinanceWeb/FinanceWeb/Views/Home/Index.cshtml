@@ -1,0 +1,51 @@
+﻿@model FinanceWeb.Entities.Account
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>Willkommen</h1>
+<br />
+<div>
+    <b>Guthaben:</b>
+    <div>
+        <label asp-for="Credit"> €</label>
+    </div>
+</div>
+<div style="margin-top: 50px">
+    <b>Besitz:</b>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Anzahl</th>
+            <th>Wert</th>
+        </tr>
+        @{
+            foreach (var possession in Model.Possessions)
+            {
+                <tr>
+                    <td>@possession.Shares.ID</td>
+                    <td>@possession.Shares.Name</td>
+                    <td>@possession.Number</td>
+                    <td>@(@possession.Shares.ShareValue.First().Value * @possession.Number)€</td>
+                    <td>
+                        <a asp-route-id="@possession.Shares.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>
+                        <a asp-route-id="@possession.Shares.ID" asp-action="SellShare" class="btn btn-warning">Verkaufen</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        width: 100%;
+    }
+
+    td, th {
+        text-align: left;
+        padding: 8px;
+    }
+</style>
