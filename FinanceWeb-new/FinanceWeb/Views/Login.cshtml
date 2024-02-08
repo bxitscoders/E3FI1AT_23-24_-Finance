@@ -1,0 +1,17 @@
+﻿@page
+@model FinanceWeb.ViewController.LoginController
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <label asp-for="Input.User.UserName"></label>
+    <input asp-for="Input.User.UserName" />
+
+    <label asp-for="Input.Password"></label>
+    <input asp-for="Input.Password" type="password" />
+
+    <a asp-controller="LoginController" asp-action="LoginClick" value="LogIn" class="btn btn-primary" />
+</form>

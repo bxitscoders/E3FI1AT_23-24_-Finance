@@ -30,7 +30,7 @@ namespace FinanceWeb
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options =>
         {
-            options.LoginPath = "/Account/Login"; // Set the login path
+            options.LoginPath = "/Views/Login"; // Set the login path
             options.AccessDeniedPath = "/Account/AccessDenied"; // Set the Access Denied path
         });
 
@@ -47,7 +47,7 @@ namespace FinanceWeb
             
             services.AddRazorPages(options =>
             {
-                options.Conventions.AllowAnonymousToPage("/Account/Login");
+                options.Conventions.AllowAnonymousToPage("/Views/Login");
                 options.Conventions.AllowAnonymousToPage("/Account/SignUp");
                 options.Conventions.AllowAnonymousToPage("/Account/HomeWindow");
                 options.Conventions.AllowAnonymousToPage("/Account/SharesPage/SharesPage");
