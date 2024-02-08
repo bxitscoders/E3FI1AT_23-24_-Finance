@@ -44,5 +44,10 @@ namespace FinanceWeb.Logic
                 context.SaveChanges();
             }
         }
+
+        public static void Sell()
+        {
+
+        }
     }
 }

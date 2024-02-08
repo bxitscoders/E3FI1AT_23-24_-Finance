@@ -15,5 +15,10 @@ namespace FinanceWeb.Pages.Account
         {
             Account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
         }
+
+        public IActionResult Sell()
+        {
+            return Page();
+        }
     }
 }

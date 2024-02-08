@@ -26,6 +26,9 @@
                 <td>@possession.Shares.Name</td>
                 <td>@possession.Number</td>
                 <td>@(@possession.Shares.ShareValue.First().Value * @possession.Number)€</td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="HomeWindowModel" asp-action="Sell" />
+                </td>
             </tr>
         }
     </table>
@@ -34,17 +37,11 @@
 <style>
     table {
         font-family: arial, sans-serif;
-        border-collapse: collapse;
         width: 100%;
     }
 
     td, th {
-        border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
     }
 </style>
