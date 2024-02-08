@@ -20,15 +20,15 @@ namespace FinanceWeb.Logic
         }
 
         /// <summary>
-        /// Get account by id
+        /// Get account by userId
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        public static Account GetAccountById(int id)
+        public static Account GetAccountByUserId(int id)
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Account.Where(a => a.ID == id).Include(a => a.Possessions).ToList();
+                var entity = context.Account.Where(a => a.UserID == id).Include(a => a.Possessions).ThenInclude(p => p.Shares).ThenInclude(s => s.ShareValue).ToList();
                 return entity.FirstOrDefault();
             }
         }
