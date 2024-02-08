@@ -1,3 +1,5 @@
+using FinanceWeb.Entities;
+using FinanceWeb.Logic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -33,27 +35,28 @@ namespace FinanceWeb.Pages.Account
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
+
+            [Required]
+            public User User { get; set; }
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
+            if (UserLogic.GetUserByUsername(Input.User.UserName) != null)
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, Input.Email),
-                    // Add additional claims as needed
-                };
-
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-                return RedirectToPage("/Index");
+                return RedirectToPage("./HomeWindow");
             }
-
-            return Page();
+            else
+            {
+                return Page();
+            }        
+        }
+        public void LogInClick()
+        {
+            if (UserLogic.GetUserByUsername(Input.User.UserName) != null)
+            {
+                RedirectToPage("./HomeWindow");
+            }
         }
     }
 }

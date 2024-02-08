@@ -36,6 +36,16 @@ namespace FinanceWeb.Logic
             }
         }
 
+        public static User GetUserByUsername(string username)
+        {
+            using (var context = new FinanceDataContext())
+            {
+                List<User> users = context.User.Where(u => u.UserName== username).ToList();
+                GlobalContext.User = users.FirstOrDefault();
+                return users.FirstOrDefault();
+            }
+        }
+
         /// <summary>
         /// Update a user in database
         /// </summary>

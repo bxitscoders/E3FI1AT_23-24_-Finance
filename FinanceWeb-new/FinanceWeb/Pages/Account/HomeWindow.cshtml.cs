@@ -13,7 +13,7 @@ namespace FinanceWeb.Pages.Account
         public Entities.Account Account { get; set; }
         public void OnGet()
         {
-            Account = AccountLogic.GetAccountByUserId(14);
-          }
+            Account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
+        }
     }
 }
