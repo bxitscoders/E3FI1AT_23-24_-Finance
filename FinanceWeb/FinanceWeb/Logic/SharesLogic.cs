@@ -1,5 +1,6 @@
 ﻿using FinanceWeb.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FinanceWeb.Logic
@@ -31,6 +32,16 @@ namespace FinanceWeb.Logic
                 var entity = context.Shares.Include(s => s.ShareValue).ToList();
                 context.SaveChanges();
                 return entity.FirstOrDefault();
+            }
+        }
+
+        public static List<Shares> GetShares()
+        {
+            using (var context = new FinanceDataContext())
+            {
+                var entity = context.Shares.Include(s => s.ShareValue).ToList();
+                context.SaveChanges();
+                return entity;
             }
         }
 
