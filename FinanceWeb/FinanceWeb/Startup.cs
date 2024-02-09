@@ -45,6 +45,7 @@ namespace FinanceWeb
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +75,7 @@ namespace FinanceWeb
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
             });
         }
     }

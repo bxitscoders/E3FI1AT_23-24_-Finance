@@ -1,0 +1,20 @@
+﻿@model List<FinanceWeb.Entities.Shares>
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Wert</th>
+    </tr>
+    @{
+        foreach (var Share in Model)
+        {
+        <tr>
+            <td>@Share.ID</td>
+            <td>@Share.Name</td>
+            <td>@Share.ShareValue</td>
+        </tr>
+        }
+    }
+</table>

@@ -13,6 +13,7 @@ namespace FinanceWeb.Controllers
 {
     public class HomeController : Controller
     {
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -26,7 +27,12 @@ namespace FinanceWeb.Controllers
             return View(account);
         }
 
+
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Stocks()
         {
             return View();
         }
@@ -84,5 +90,9 @@ namespace FinanceWeb.Controllers
                 
             return RedirectToAction("Index");
         }
+
+
     }
+
 }
+
