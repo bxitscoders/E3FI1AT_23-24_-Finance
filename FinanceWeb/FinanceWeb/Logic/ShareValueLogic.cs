@@ -24,6 +24,22 @@ namespace FinanceWeb.Logic
             }
         }
 
+
+        /// <summary>
+        /// Get the latest sharevalue for share
+        /// </summary>
+        /// <param name="shareId"></param>
+        /// <returns></returns>
+        public static ShareValue GetCurrentShareValueByShareId(int shareId)
+        {
+            using (var context = new FinanceDataContext())
+            {
+                var entity = context.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault();
+                context.SaveChanges();
+                return entity;
+            }
+        }
+
         public static void UpdateShareValue(ShareValue shareValue)
         {
             using (var context = new FinanceDataContext())

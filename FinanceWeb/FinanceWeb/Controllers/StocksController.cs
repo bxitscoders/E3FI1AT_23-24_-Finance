@@ -21,7 +21,9 @@ namespace FinanceWeb.Controllers
 
         public IActionResult Index()
         {
-            return View("Stocks", SharesLogic.GetShares());
+            //List<Shares> shares = SharesLogic.GetShares();
+
+            return View(SharesLogic.GetShares());
         }
     }
 

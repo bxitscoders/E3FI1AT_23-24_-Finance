@@ -30,8 +30,8 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Possession.Where(possession => possession.SharesID == shareId).Include(s => s.Shares).ThenInclude(s => s.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault()).ToList();
-                context.SaveChanges();
+                var entity = context.Possession.Where(possession => possession.SharesID == shareId).Include(s => s.Shares).ThenInclude(s => s.ShareValue).OrderByDescending(e => e.Shares.ShareValue.First().Timestamp).ToList();
+             
                 return entity.FirstOrDefault();
             }
         }

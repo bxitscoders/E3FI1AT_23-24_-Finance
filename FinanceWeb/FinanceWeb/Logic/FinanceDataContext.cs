@@ -17,7 +17,7 @@ namespace FinanceWeb.Logic
         public DbSet<ShareValue> ShareValue { get; set; }
         public DbSet<Possession> Possession { get; set; }
         public DbSet<ApiDetails> ApiDetails { get; set; }
-        public DbSet<FinanceTransaction> FinanceTransactions { get; set; }
+        public DbSet<FinanceTransaction> FinanceTransaction { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
