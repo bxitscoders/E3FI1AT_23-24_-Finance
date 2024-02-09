@@ -1,5 +1,7 @@
 ﻿using FinanceWeb.Entities;
+using FinanceWeb.Logic;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace FinanceWeb.Controllers
 {
@@ -12,7 +14,11 @@ namespace FinanceWeb.Controllers
 
         public IActionResult SignUp(User user)
         {
-            return View();
+            if (!String.IsNullOrEmpty(user.UserName))
+            {
+                UserLogic.CreateUser(user);
+            }
+            return RedirectToPage("");
         }
     }
 }

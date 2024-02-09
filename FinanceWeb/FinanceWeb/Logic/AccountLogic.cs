@@ -24,12 +24,21 @@ namespace FinanceWeb.Logic
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        public static Account GetAccountByUserId(int id)
+        public static Account GetAccountByUserId(int userId)
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Account.Where(a => a.UserID == id).Include(a => a.Possessions).ThenInclude(p => p.Shares).ThenInclude(s => s.ShareValue).ToList();
+                var entity = context.Account.Where(a => a.UserID == userId).Include(a => a.Possessions).ThenInclude(p => p.Shares).ThenInclude(s => s.ShareValue).ToList();
                 return entity.FirstOrDefault();
+            }
+        }
+
+        public static int GetAccountCreditByUserId(int userId)
+        {
+            using (var context = new FinanceDataContext())
+            {
+                var entity = context.Account.Where(a => a.UserID == userId).ToList();
+                return entity.FirstOrDefault().Credit;
             }
         }
 
@@ -45,6 +54,24 @@ namespace FinanceWeb.Logic
                 if (entity != null)
                 {
                     entity.Credit = account.Credit;
+                }
+                context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Set new Credit into database by userId
+        /// </summary>
+        /// <param name="newCredit"></param>
+        /// <param name="userId"></param>
+        public static void UpdateAccountCreditByUserId(int newCredit, int userId)
+        {
+            using (var context = new FinanceDataContext())
+            {
+                var entity = context.Account.FirstOrDefault(a => a.UserID == userId);
+                if (entity != null)
+                {
+                    entity.Credit =newCredit;
                 }
                 context.SaveChanges();
             }

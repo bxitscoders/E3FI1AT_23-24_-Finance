@@ -26,12 +26,22 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static void UpdatePossession(Possession possession)
+        public static Possession GetPossessionByShareId(int shareId)
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Possession.FirstOrDefault(s => s.ID == possession.ID);
-                entity.Number = possession.Number;
+                var entity = context.Possession.Where(possession => possession.SharesID == shareId).Include(s => s.Shares).ThenInclude(s => s.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault()).ToList();
+                context.SaveChanges();
+                return entity.FirstOrDefault();
+            }
+        }
+
+        public static void UpdateNumberByShareId(int newNumber ,int shareId)
+        {
+            using (var context = new FinanceDataContext())
+            {
+                var entity = context.Possession.FirstOrDefault(p => p.SharesID == shareId);
+                entity.Number = newNumber;
                 context.SaveChanges();
             }
         }

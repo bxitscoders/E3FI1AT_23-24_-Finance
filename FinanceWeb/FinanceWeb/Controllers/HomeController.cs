@@ -49,18 +49,16 @@ namespace FinanceWeb.Controllers
 
         public IActionResult BuyShare(int id)
         {
-            Possession selectedPossession;
-            Shares share = SharesLogic.GetShareById(id);
-            Account account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
-            selectedPossession = account.Possessions.FirstOrDefault(possession => possession.SharesID == id);
+            int credit = AccountLogic.GetAccountCreditByUserId(GlobalContext.User.ID);
+            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);
 
-            if (account.Credit >= share.ShareValue.FirstOrDefault().Value)
+            if (credit >= selectedPossession.Shares.ShareValue.FirstOrDefault().Value)
             {
-                account.Credit -= share.ShareValue.FirstOrDefault().Value;
+                credit -= selectedPossession.Shares.ShareValue.FirstOrDefault().Value;
                 selectedPossession.Number++;
 
-                AccountLogic.UpdateAccount(account);
-                PossessionLogic.UpdatePossession(selectedPossession);
+                AccountLogic.UpdateAccountCreditByUserId(credit, GlobalContext.User.ID);
+                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id);
             }
             
             return RedirectToAction("Index");
@@ -68,21 +66,22 @@ namespace FinanceWeb.Controllers
 
         public IActionResult SellShare(int id)
         {
-            Possession selectedPossession;
-            Shares share = SharesLogic.GetShareById(id);
-            Account account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
-            selectedPossession = account.Possessions.FirstOrDefault(possession => possession.SharesID == id);
+            int credit = AccountLogic.GetAccountCreditByUserId(GlobalContext.User.ID);
+            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);
 
-            account.Credit += share.ShareValue.FirstOrDefault().Value;
+            credit += selectedPossession.Shares.ShareValue.FirstOrDefault().Value;
             selectedPossession.Number--;
 
-            AccountLogic.UpdateAccount(account);
             if (selectedPossession.Number > 0)
-                PossessionLogic.UpdatePossession(selectedPossession);
+            {
+                AccountLogic.UpdateAccountCreditByUserId(credit, GlobalContext.User.ID);
+                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id);
+            }
             else
+            {
                 PossessionLogic.DeletePossession(selectedPossession);
-
-
+            }
+                
             return RedirectToAction("Index");
         }
     }
