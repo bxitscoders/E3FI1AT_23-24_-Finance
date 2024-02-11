@@ -1,0 +1,42 @@
+﻿@model List<FinanceWeb.Entities.FinanceTransaction>
+
+@{
+    ViewData["Title"] = "Transaktionen";
+}
+
+<h1>Transaktionen</h1>
+<div style="margin-top: 50px">
+    <table>
+        <tr>
+            <th>Datum</th>
+            <th>Transaktionstyp</th>
+            <th>Anzahl</th>
+            <th>Wert</th>
+            <th>Gesamtsumme</th>
+        </tr>
+        @{
+            foreach (var transaction in Model)
+            {
+                <tr>
+                    <td>@transaction.Date</td>
+                    <td>@transaction.TransactionType</td>
+                    <td>@transaction.Ammount</td>
+                    <td>@(transaction.ShareValue.Value)€</td>
+                    <td>@(transaction.ShareValue.Value * @transaction.Ammount)€</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        width: 100%;
+    }
+
+    td, th {
+        text-align: left;
+        padding: 8px;
+    }
+</style>

@@ -1,4 +1,6 @@
-﻿namespace FinanceWeb.Enum
+﻿using System;
+
+namespace FinanceWeb.Enum
 {
     public enum TransactionTypeEnum
     {

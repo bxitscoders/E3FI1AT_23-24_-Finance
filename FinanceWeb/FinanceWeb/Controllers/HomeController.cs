@@ -54,7 +54,7 @@ namespace FinanceWeb.Controllers
                 return View();
         }
 
-        public IActionResult BuyShare(int id)
+        public IActionResult BuyShare(int id, int amount)
         {
             int credit = AccountLogic.GetAccountCreditByUserId(GlobalContext.User.ID);
             Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);
@@ -73,7 +73,7 @@ namespace FinanceWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult SellShare(int id)
+        public IActionResult SellShare(int id, int amount)
         {
             int credit = AccountLogic.GetAccountCreditByUserId(GlobalContext.User.ID);
             Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);

@@ -2,7 +2,9 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    int amount = 5;
 }
+
 <h1>Willkommen</h1>
 <br />
 <div>
@@ -29,8 +31,13 @@
                     <td>@possession.Number</td>
                     <td>@(@possession.Shares.ShareValue.First().Value * @possession.Number)€</td>
                     <td>
-                        <a asp-route-id="@possession.Shares.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>
-                        <a asp-route-id="@possession.Shares.ID" asp-action="SellShare" class="btn btn-warning">Verkaufen</a>
+                        <form>
+                            <a asp-route-amount="@amount" asp-route-id="@possession.Shares.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>
+                            <a asp-route-amount="@amount" asp-route-id="@possession.Shares.ID" asp-action="SellShare" class="btn btn-warning">Verkaufen</a>
+                            <input type="number" asp-for="@amount" />
+
+                        </form>
+
                     </td>
                 </tr>
             }

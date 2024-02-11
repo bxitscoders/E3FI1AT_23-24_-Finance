@@ -1,5 +1,6 @@
 ﻿using FinanceWeb.Entities;
 using FinanceWeb.Enum;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.FinanceTransaction.Where(ft => ft.UserId == userId).ToList();
+                var entity = context.FinanceTransaction.Where(ft => ft.UserId == userId).Include(f => f.ShareValue).ToList();
                 return entity;
             }
         }

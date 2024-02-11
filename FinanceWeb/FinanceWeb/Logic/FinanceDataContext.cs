@@ -1,6 +1,6 @@
 ﻿using FinanceWeb.Entities;
+using FinanceWeb.Enum;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 
 namespace FinanceWeb.Logic
 {
@@ -27,6 +27,11 @@ namespace FinanceWeb.Logic
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
+
+            modelBuilder.Entity<FinanceTransaction>().ToTable("financetransaction")
+                .Property(e => e.TransactionType)
+                .HasConversion(v => v.ToString(),
+            v => (TransactionTypeEnum)System.Enum.Parse(typeof(TransactionTypeEnum), v));
         }
     }
 }
