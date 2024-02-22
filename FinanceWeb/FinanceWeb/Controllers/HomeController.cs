@@ -48,6 +48,7 @@ namespace FinanceWeb.Controllers
         {
             User user = UserLogic.GetUserByUsername(username);
             GlobalContext.User = user;
+            GlobalContext.Credit = AccountLogic.GetAccountCreditByUserId(user.ID);
             if (user != null)
                 return RedirectToAction("Index");
             else
@@ -56,16 +57,15 @@ namespace FinanceWeb.Controllers
 
         public IActionResult BuyShare(int id, int amount)
         {
-            int credit = AccountLogic.GetAccountCreditByUserId(GlobalContext.User.ID);
             Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);
             ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
 
-            if (credit >= shareValue.Value)
+            if (GlobalContext.Credit >= shareValue.Value)
             {
-                credit -= shareValue.Value;
+                GlobalContext.Credit -= shareValue.Value;
                 selectedPossession.Number++;
 
-                AccountLogic.UpdateAccountCreditByUserId(credit, GlobalContext.User.ID);
+                AccountLogic.UpdateAccountCreditByUserId(GlobalContext.Credit, GlobalContext.User.ID);
                 PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id);
                 FinanceTransactionLogic.NewTransaction(TransactionTypeEnum.Buy, 1, shareValue.ID);
             }
@@ -75,11 +75,10 @@ namespace FinanceWeb.Controllers
 
         public IActionResult SellShare(int id, int amount)
         {
-            int credit = AccountLogic.GetAccountCreditByUserId(GlobalContext.User.ID);
             Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);
             ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
 
-            credit += shareValue.Value;
+            GlobalContext.Credit += shareValue.Value;
             selectedPossession.Number--;
 
             if (selectedPossession.Number > 0)
@@ -90,7 +89,7 @@ namespace FinanceWeb.Controllers
             {
                 PossessionLogic.DeletePossession(selectedPossession);
             }
-            AccountLogic.UpdateAccountCreditByUserId(credit, GlobalContext.User.ID);
+            AccountLogic.UpdateAccountCreditByUserId(GlobalContext.Credit, GlobalContext.User.ID);
             FinanceTransactionLogic.NewTransaction(TransactionTypeEnum.Sell, 1, shareValue.ID);
 
             return RedirectToAction("Index");

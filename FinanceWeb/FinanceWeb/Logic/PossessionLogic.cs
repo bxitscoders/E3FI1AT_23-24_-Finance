@@ -7,12 +7,13 @@ namespace FinanceWeb.Logic
 {
     public static class PossessionLogic
     {
-        public static void CreatePossession(Possession possession)
+        public static Possession CreatePossession(Possession possession)
         {
             using (var context = new FinanceDataContext())
             {
-                context.Possession.Add(possession);
+                var entity = context.Possession.Add(possession);
                 context.SaveChanges();
+                return entity.Entity;
             }
         }
 

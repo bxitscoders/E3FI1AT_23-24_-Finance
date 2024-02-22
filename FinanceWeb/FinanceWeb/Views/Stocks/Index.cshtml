@@ -1,9 +1,9 @@
 ﻿@model List<FinanceWeb.Entities.Shares>
 
 
+
 <table>
     <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Wert</th>
     </tr>
@@ -11,9 +11,21 @@
         foreach (var Share in Model)
         {
             <tr>
-                <td>@Share.ID</td>
                 <td>@Share.Name</td>
-                <td>@Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value</td>
+                <td>@Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value €</td>
+                <td>
+
+                    @if ((int)ViewBag.Credit > Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value)
+                    {
+                        <a asp-route-id="@Share.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-dark">Kaufen</a>
+                    }
+
+
+                </td>
             </tr>
         }
     }

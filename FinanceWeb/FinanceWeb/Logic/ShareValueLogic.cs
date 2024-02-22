@@ -34,7 +34,7 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault();
+                var entity = context.ShareValue.Where(shareValue => shareValue.SharesID == shareId).OrderByDescending(sv => sv.Timestamp).FirstOrDefault();
                 context.SaveChanges();
                 return entity;
             }
