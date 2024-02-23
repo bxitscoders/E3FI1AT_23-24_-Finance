@@ -44,16 +44,7 @@ namespace FinanceWeb.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult VerifyLogin(string username)
-        {
-            User user = UserLogic.GetUserByUsername(username);
-            GlobalContext.User = user;
-            GlobalContext.Credit = AccountLogic.GetAccountCreditByUserId(user.ID);
-            if (user != null)
-                return RedirectToAction("Index");
-            else
-                return View();
-        }
+        
 
         public IActionResult BuyShare(int id, int amount)
         {

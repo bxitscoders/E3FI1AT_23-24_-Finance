@@ -17,8 +17,12 @@ namespace FinanceWeb.Controllers
             if (!String.IsNullOrEmpty(user.UserName))
             {
                 UserLogic.CreateUser(user);
+                return RedirectToAction("Index", "Login");
             }
-            return RedirectToPage("");
+            else
+            {
+                return RedirectToAction("Index");
+            }        
         }
     }
 }

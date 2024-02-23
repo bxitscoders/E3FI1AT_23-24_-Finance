@@ -1,4 +1,5 @@
-﻿using FinanceWeb.Logic;
+﻿using FinanceWeb.Entities;
+using FinanceWeb.Logic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceWeb.Controllers
@@ -9,7 +10,17 @@ namespace FinanceWeb.Controllers
         {
             return View();
         }
+        public IActionResult VerifyLogin(string username)
+        {
+            User user = UserLogic.GetUserByUsername(username);
+            GlobalContext.User = user;
+            GlobalContext.Credit = AccountLogic.GetAccountCreditByUserId(user.ID);
+            if (user != null)
+                return RedirectToAction("Index", "Home");
+            else
+                return RedirectToAction("Index");
+        }
 
-        
+
     }
 }

@@ -9,7 +9,7 @@
 <form asp-controller="SignUp" asp-action="SignUp">
     <div style="margin-top= 2%">
         <lable>Vorname</lable>
-        <input asp-for="FirstName" type="text" />
+        <input required asp-for="FirstName" type="text" />
     </div>
     <div>
         <lable>Nachname</lable>
@@ -17,7 +17,7 @@
     </div>
     <div>
         <lable>Benutzername</lable>
-        <input asp-for="UserName" type="text" />
+        <input required asp-for="UserName" type="text" />
     </div>
     <div>
         <button type="submit" class="btn btn-success">Speichern</button>
