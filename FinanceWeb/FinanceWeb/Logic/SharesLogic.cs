@@ -11,12 +11,14 @@ namespace FinanceWeb.Logic
         /// Create share in database
         /// </summary>
         /// <param name="shares"></param>
-        public static void CreateShare(Shares shares)
+        /// <returns>Share Id</returns>
+        public static int CreateShare(Shares shares)
         {
             using (var context = new FinanceDataContext())
             {
-                context.Shares.Add(shares);
+                var entity = context.Shares.Add(shares);
                 context.SaveChanges();
+                return entity.Entity.ID;
             }
         }
 
@@ -32,6 +34,21 @@ namespace FinanceWeb.Logic
                 var entity = context.Shares.Include(s => s.ShareValue).ToList();
                 context.SaveChanges();
                 return entity.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// Checks if share excists in database by name
+        /// </summary>
+        /// <param name="shareName"></param>
+        /// <returns>true when share excists and false if not</returns>
+        public static bool ShareExists(string shareName)
+        {
+            using (var context = new FinanceDataContext())
+            {
+                var entity = context.Shares.Where(s => s.Name == shareName).ToList();
+                context.SaveChanges();
+                return entity.Count > 0;
             }
         }
 

@@ -3,12 +3,14 @@ using FinanceWeb.Enum;
 using FinanceWeb.Logic;
 using FinanceWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 
 
@@ -44,6 +46,12 @@ namespace FinanceWeb.Controllers
             }
             return RedirectToAction("Index");
         }
-    }
 
+        public IActionResult LoadStocks()
+        {
+            ApiLogic.GetAPIStocks();
+            return RedirectToAction("Index");
+        }
+
+    }
 }

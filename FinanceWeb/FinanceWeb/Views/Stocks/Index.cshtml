@@ -1,32 +1,47 @@
 ﻿@model List<FinanceWeb.Entities.Shares>
 
+<div>
+    <a asp-action="LoadStocks" class="btn btn-success">Load Stocks</a>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Wert</th>
+        </tr>
+        @{
+            foreach (var Share in Model)
+            {
+                <tr>
+                    <td>@Share.Name</td>
+                    <td>@Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value €</td>
+                    <td>
+
+                        @if ((int)ViewBag.Credit > Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value)
+                        {
+                            <a asp-route-id="@Share.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-dark">Kaufen</a>
+                        }
 
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Wert</th>
-    </tr>
-    @{
-        foreach (var Share in Model)
-        {
-            <tr>
-                <td>@Share.Name</td>
-                <td>@Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value €</td>
-                <td>
-
-                    @if ((int)ViewBag.Credit > Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value)
-                    {
-                        <a asp-route-id="@Share.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>
-                    }
-                    else
-                    {
-                        <a class="btn btn-dark">Kaufen</a>
-                    }
-
-
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            }
         }
+    </table>
+</div>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        width: 100%;
     }
-</table>
+
+    td, th {
+        text-align: left;
+        padding: 8px;
+    }
+</style>
