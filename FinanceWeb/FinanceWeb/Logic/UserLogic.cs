@@ -13,12 +13,13 @@ namespace FinanceWeb.Logic
         /// Creates a user in Database
         /// </summary>
         /// <param name="user"></param>
-        public static void CreateUser(User user)
+        public static int CreateUser(User user)
         {
             using (var context = new FinanceDataContext())
             {
-                context.User.Add(user);
+                var entity = context.User.Add(user);
                 context.SaveChanges();
+                return entity.Entity.ID;
             }
         }
 

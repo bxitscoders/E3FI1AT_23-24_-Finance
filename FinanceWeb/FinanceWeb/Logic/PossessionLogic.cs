@@ -27,11 +27,11 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static Possession GetPossessionByShareId(int shareId)
+        public static Possession GetPossessionByShareId(int shareId, int accountId)
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Possession.Where(possession => possession.SharesID == shareId).Include(s => s.Shares).ThenInclude(s => s.ShareValue).OrderByDescending(e => e.Shares.ShareValue.First().Timestamp).ToList();
+                var entity = context.Possession.Where(possession => possession.SharesID == shareId && possession.AccountID == accountId).Include(s => s.Shares).ThenInclude(s => s.ShareValue).OrderByDescending(e => e.Shares.ShareValue.First().Timestamp).ToList();
              
                 return entity.FirstOrDefault();
             }

@@ -29,7 +29,7 @@
                     <td>@possession.Shares.ID</td>
                     <td>@possession.Shares.Name</td>
                     <td>@possession.Number</td>
-                    <td>@(@possession.Shares.ShareValue.First().Value * @possession.Number)€</td>
+                    <td>@(@possession.Shares.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value * @possession.Number)€</td>
                     <td>
                         <form>
                             <a asp-route-amount="@amount" asp-route-id="@possession.Shares.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>

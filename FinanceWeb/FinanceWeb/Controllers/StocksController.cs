@@ -31,11 +31,10 @@ namespace FinanceWeb.Controllers
 
         public IActionResult BuyShare(int id)
         {
-            var account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
             ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
             if (GlobalContext.Credit >= shareValue.Value)
             {
-                Possession possession = PossessionLogic.GetPossessionByShareId(id) ?? PossessionLogic.CreatePossession(new Possession() { AccountID = account.ID, Number = 0, SharesID = id });
+                Possession possession = PossessionLogic.GetPossessionByShareId(id, GlobalContext.AccountId) ?? PossessionLogic.CreatePossession(new Possession() { AccountID = GlobalContext.AccountId, Number = 0, SharesID = id });
 
                 GlobalContext.Credit -= shareValue.Value;
                 possession.Number++;

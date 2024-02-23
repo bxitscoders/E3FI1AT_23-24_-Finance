@@ -17,7 +17,7 @@
                     <td>@Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value €</td>
                     <td>
 
-                        @if ((int)ViewBag.Credit > Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value)
+                        @if ((int)ViewBag.Credit >= Share.ShareValue.OrderByDescending(sv => sv.Timestamp).FirstOrDefault().Value)
                         {
                             <a asp-route-id="@Share.ID" asp-action="BuyShare" class="btn btn-success">Kaufen</a>
                         }

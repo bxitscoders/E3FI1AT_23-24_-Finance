@@ -16,7 +16,8 @@ namespace FinanceWeb.Controllers
         {
             if (!String.IsNullOrEmpty(user.UserName))
             {
-                UserLogic.CreateUser(user);
+                int userId = UserLogic.CreateUser(user);
+                AccountLogic.CreateAccount(new Account() { Credit = 100000, UserID = userId }) ;
                 return RedirectToAction("Index", "Login");
             }
             else

@@ -25,6 +25,7 @@ namespace FinanceWeb.Controllers
         public IActionResult Index()
         {
             Account account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
+            GlobalContext.AccountId = account.ID;
             return View(account);
         }
 
@@ -48,7 +49,7 @@ namespace FinanceWeb.Controllers
 
         public IActionResult BuyShare(int id, int amount)
         {
-            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);
+            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id, GlobalContext.AccountId);
             ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
 
             if (GlobalContext.Credit >= shareValue.Value)
@@ -66,7 +67,7 @@ namespace FinanceWeb.Controllers
 
         public IActionResult SellShare(int id, int amount)
         {
-            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id);
+            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id, GlobalContext.AccountId);
             ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
 
             GlobalContext.Credit += shareValue.Value;
