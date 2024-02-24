@@ -24,9 +24,17 @@ namespace FinanceWeb.Controllers
 
         public IActionResult Index()
         {
-            Account account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
-            GlobalContext.AccountId = account.ID;
-            return View(account);
+            if (GlobalContext.User != null)
+            {
+                Account account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
+                GlobalContext.AccountId = account.ID;
+                return View(account);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            
         }
 
 

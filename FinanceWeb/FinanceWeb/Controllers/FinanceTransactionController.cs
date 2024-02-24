@@ -7,7 +7,15 @@ namespace FinanceWeb.Controllers
     {
         public IActionResult Index()
         {
-            return View(FinanceTransactionLogic.GetFinanceTransactions(GlobalContext.User.ID));
+            if (GlobalContext.User != null)
+            {
+                return View(FinanceTransactionLogic.GetFinanceTransactions(GlobalContext.User.ID));
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            
         }
     }
 }
