@@ -40,7 +40,7 @@ namespace FinanceWeb.Controllers
                 possession.Number++;
 
                 AccountLogic.UpdateAccountCreditByUserId(GlobalContext.Credit, GlobalContext.User.ID);
-                PossessionLogic.UpdateNumberByShareId(possession.Number, id);
+                PossessionLogic.UpdateNumberByShareId(possession.Number, id, GlobalContext.AccountId);
                 FinanceTransactionLogic.NewTransaction(TransactionTypeEnum.Buy, 1, shareValue.ID);
             }
             return RedirectToAction("Index");

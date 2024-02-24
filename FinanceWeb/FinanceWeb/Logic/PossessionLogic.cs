@@ -37,11 +37,11 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static void UpdateNumberByShareId(int newNumber ,int shareId)
+        public static void UpdateNumberByShareId(int newNumber ,int shareId, int accountId)
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Possession.FirstOrDefault(p => p.SharesID == shareId);
+                var entity = context.Possession.FirstOrDefault(p => p.SharesID == shareId && p.AccountID == accountId);
                 entity.Number = newNumber;
                 context.SaveChanges();
             }

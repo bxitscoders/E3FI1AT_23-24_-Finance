@@ -58,7 +58,7 @@ namespace FinanceWeb.Controllers
                 selectedPossession.Number++;
 
                 AccountLogic.UpdateAccountCreditByUserId(GlobalContext.Credit, GlobalContext.User.ID);
-                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id);
+                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id, GlobalContext.AccountId);
                 FinanceTransactionLogic.NewTransaction(TransactionTypeEnum.Buy, 1, shareValue.ID);
             }
             
@@ -75,7 +75,7 @@ namespace FinanceWeb.Controllers
 
             if (selectedPossession.Number > 0)
             {
-                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id);           
+                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id, GlobalContext.AccountId);           
             }
             else
             {
