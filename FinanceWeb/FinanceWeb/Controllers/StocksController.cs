@@ -48,7 +48,7 @@ namespace FinanceWeb.Controllers
 
         public IActionResult LoadStocks()
         {
-            ApiLogic.GetAPIStocks();
+            ApiLogic.LoadAPIStocks();
             return RedirectToAction("Index");
         }
 

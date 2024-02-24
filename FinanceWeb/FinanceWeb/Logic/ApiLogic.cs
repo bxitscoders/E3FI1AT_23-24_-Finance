@@ -13,7 +13,7 @@ namespace FinanceWeb.Logic
         /// <summary>
         /// Load finance data from api point and load it into database
         /// </summary>
-        public static async void GetAPIStocks()
+        public static async void LoadAPIStocks()
         {
             JObject body;
             var client = new HttpClient();
@@ -34,15 +34,19 @@ namespace FinanceWeb.Logic
             }
             var result = body["chart"]["result"][0] as JObject;
             var metaData = result["meta"] as JObject;
-
+            int shareId;
             if (!SharesLogic.ShareExists(metaData["symbol"].ToString()))
             {
-                int shareId = SharesLogic.CreateShare(new Entities.Shares() { Name = metaData["symbol"].ToString() });
-
-                var value = (int)Math.Floor(decimal.Parse(metaData["regularMarketPrice"].ToString()));
-                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds((double)metaData["regularMarketTime"]);
-                ShareValueLogic.CreateShareValue(new Entities.ShareValue() { SharesID = shareId, Value = value, Timestamp = dateTime });
+                shareId = SharesLogic.CreateShare(new Entities.Shares() { Name = metaData["symbol"].ToString() });
             }
+            else
+            {
+                shareId = SharesLogic.GetShareIdByName(metaData["symbol"].ToString());
+            }
+
+            var value = (int)Math.Floor(decimal.Parse(metaData["regularMarketPrice"].ToString()));
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds((double)metaData["regularMarketTime"]);
+            ShareValueLogic.CreateShareValue(new Entities.ShareValue() { SharesID = shareId, Value = value, Timestamp = dateTime });
         }
     }
 }

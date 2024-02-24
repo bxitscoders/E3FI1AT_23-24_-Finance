@@ -31,9 +31,24 @@ namespace FinanceWeb.Logic
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Shares.Include(s => s.ShareValue).ToList();
+                var entity = context.Shares.Include(s => s.ShareValue).Where(s => s.ID == id).ToList();
                 context.SaveChanges();
                 return entity.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// Get share by share name
+        /// </summary>
+        /// <param name="shareName"></param>
+        /// <returns></returns>
+        public static int GetShareIdByName(string shareName)
+        {
+            using (var context = new FinanceDataContext())
+            {
+                var entity = context.Shares.Where(s => s.Name == shareName).ToList();
+                context.SaveChanges();
+                return entity.FirstOrDefault().ID;
             }
         }
 
