@@ -26,7 +26,7 @@ namespace FinanceWeb.Controllers
         {
             if (GlobalContext.User != null)
             {
-                Account account = AccountLogic.GetAccountByUserId(GlobalContext.User.ID);
+                Account account = AccountLogic.GetAccount(GlobalContext.User.ID);
                 GlobalContext.AccountId = account.ID;
                 return View(account);
             }
@@ -57,8 +57,8 @@ namespace FinanceWeb.Controllers
 
         public IActionResult BuyShare(int id, int amount)
         {
-            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id, GlobalContext.AccountId);
-            ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
+            Possession selectedPossession = PossessionLogic.GetPossession(id, GlobalContext.AccountId);
+            ShareValue shareValue = ShareValueLogic.GetCurrentShareValue(id);
 
             if (GlobalContext.Credit >= shareValue.Value)
             {
@@ -66,7 +66,7 @@ namespace FinanceWeb.Controllers
                 selectedPossession.Number++;
 
                 AccountLogic.UpdateAccountCreditByUserId(GlobalContext.Credit, GlobalContext.User.ID);
-                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id, GlobalContext.AccountId);
+                PossessionLogic.UpdateAmount(selectedPossession.Number, id, GlobalContext.AccountId);
                 FinanceTransactionLogic.NewTransaction(TransactionTypeEnum.Buy, 1, shareValue.ID);
             }
             
@@ -75,15 +75,15 @@ namespace FinanceWeb.Controllers
 
         public IActionResult SellShare(int id, int amount)
         {
-            Possession selectedPossession = PossessionLogic.GetPossessionByShareId(id, GlobalContext.AccountId);
-            ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
+            Possession selectedPossession = PossessionLogic.GetPossession(id, GlobalContext.AccountId);
+            ShareValue shareValue = ShareValueLogic.GetCurrentShareValue(id);
 
             GlobalContext.Credit += shareValue.Value;
             selectedPossession.Number--;
 
             if (selectedPossession.Number > 0)
             {
-                PossessionLogic.UpdateNumberByShareId(selectedPossession.Number, id, GlobalContext.AccountId);           
+                PossessionLogic.UpdateAmount(selectedPossession.Number, id, GlobalContext.AccountId);           
             }
             else
             {

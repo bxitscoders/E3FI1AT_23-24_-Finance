@@ -5,6 +5,10 @@ namespace FinanceWeb.Logic
 {
     public static class ShareValueLogic
     {
+        /// <summary>
+        /// Create new share value data in the shareValues table
+        /// </summary>
+        /// <param name="sharesValue"></param>
         public static void CreateShareValue(ShareValue sharesValue)
         {
             using (var context = new FinanceDataContext())
@@ -14,23 +18,12 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static ShareValue GetShareValueById(int id)
-        {
-            using (var context = new FinanceDataContext())
-            {
-                var entity = context.ShareValue.ToList();
-                context.SaveChanges();
-                return entity.FirstOrDefault();
-            }
-        }
-
-
         /// <summary>
-        /// Get the latest sharevalue for share
+        /// Get the latest sharevalue for share by shareId
         /// </summary>
         /// <param name="shareId"></param>
         /// <returns></returns>
-        public static ShareValue GetCurrentShareValueByShareId(int shareId)
+        public static ShareValue GetCurrentShareValue(int shareId)
         {
             using (var context = new FinanceDataContext())
             {
@@ -40,6 +33,10 @@ namespace FinanceWeb.Logic
             }
         }
 
+        /// <summary>
+        /// Update shareValue data in shareValue table
+        /// </summary>
+        /// <param name="shareValue"></param>
         public static void UpdateShareValue(ShareValue shareValue)
         {
             using (var context = new FinanceDataContext())
@@ -51,6 +48,10 @@ namespace FinanceWeb.Logic
             }
         }
 
+        /// <summary>
+        /// Delete shareValue data in shareValue table
+        /// </summary>
+        /// <param name="shareValue"></param>
         public static void DeleteShareValue(ShareValue shareValue)
         {
             using (var context = new FinanceDataContext())

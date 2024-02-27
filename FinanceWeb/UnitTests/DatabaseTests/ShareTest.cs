@@ -17,7 +17,7 @@ namespace UnitTests.DatabaseTests
         public void GetShareTest()
         {
             int id = 1;
-            var entity = SharesLogic.GetShareById(id);
+            var entity = SharesLogic.GetShare(id);
             Assert.True(entity.ID == id);
         }
 
@@ -26,7 +26,7 @@ namespace UnitTests.DatabaseTests
         {
             var share = new Shares() { ID = 1, Name = "TestAktie2" };
             SharesLogic.UpdateSchares(share);
-            var entity = SharesLogic.GetShareById(share.ID);
+            var entity = SharesLogic.GetShare(share.ID);
             Assert.Equal(share.Name, entity.Name);
         }
 

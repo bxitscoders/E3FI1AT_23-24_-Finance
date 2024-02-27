@@ -31,16 +31,16 @@ namespace FinanceWeb.Controllers
 
         public IActionResult BuyShare(int id)
         {
-            ShareValue shareValue = ShareValueLogic.GetCurrentShareValueByShareId(id);
+            ShareValue shareValue = ShareValueLogic.GetCurrentShareValue(id);
             if (GlobalContext.Credit >= shareValue.Value)
             {
-                Possession possession = PossessionLogic.GetPossessionByShareId(id, GlobalContext.AccountId) ?? PossessionLogic.CreatePossession(new Possession() { AccountID = GlobalContext.AccountId, Number = 0, SharesID = id });
+                Possession possession = PossessionLogic.GetPossession(id, GlobalContext.AccountId) ?? PossessionLogic.CreatePossession(new Possession() { AccountID = GlobalContext.AccountId, Number = 0, SharesID = id });
 
                 GlobalContext.Credit -= shareValue.Value;
                 possession.Number++;
 
                 AccountLogic.UpdateAccountCreditByUserId(GlobalContext.Credit, GlobalContext.User.ID);
-                PossessionLogic.UpdateNumberByShareId(possession.Number, id, GlobalContext.AccountId);
+                PossessionLogic.UpdateAmount(possession.Number, id, GlobalContext.AccountId);
                 FinanceTransactionLogic.NewTransaction(TransactionTypeEnum.Buy, 1, shareValue.ID);
             }
             return RedirectToAction("Index");

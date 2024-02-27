@@ -22,9 +22,9 @@ namespace UnitTests.DatabaseTests
         [Fact]
         public void GetShareValueTest()
         {
-            int id = 1;
-            var entity = ShareValueLogic.GetShareValueById(id);
-            Assert.True(entity.ID == id);
+            int shareId = 1;
+            var entity = ShareValueLogic.GetCurrentShareValue(shareId);
+            Assert.True(entity.ID == shareId);
         }
 
         [Fact]

@@ -8,7 +8,7 @@ namespace FinanceWeb.Logic
     public static class SharesLogic
     {
         /// <summary>
-        /// Create share in database
+        /// Create share data in the shares table
         /// </summary>
         /// <param name="shares"></param>
         /// <returns>Share Id</returns>
@@ -27,7 +27,7 @@ namespace FinanceWeb.Logic
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Shares GetShareById(int id)
+        public static Shares GetShare(int id)
         {
             using (var context = new FinanceDataContext())
             {
@@ -38,11 +38,11 @@ namespace FinanceWeb.Logic
         }
 
         /// <summary>
-        /// Get share by share name
+        /// Get share by shareName
         /// </summary>
         /// <param name="shareName"></param>
         /// <returns></returns>
-        public static int GetShareIdByName(string shareName)
+        public static int GetShareId(string shareName)
         {
             using (var context = new FinanceDataContext())
             {
@@ -67,6 +67,10 @@ namespace FinanceWeb.Logic
             }
         }
 
+        /// <summary>
+        /// Get all shares from database
+        /// </summary>
+        /// <returns></returns>
         public static List<Shares> GetShares()
         {
             using (var context = new FinanceDataContext())

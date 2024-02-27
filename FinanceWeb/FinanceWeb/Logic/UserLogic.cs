@@ -10,7 +10,7 @@ namespace FinanceWeb.Logic
     public static class UserLogic
     {
         /// <summary>
-        /// Creates a user in Database
+        /// Create user data in the user table
         /// </summary>
         /// <param name="user"></param>
         public static int CreateUser(User user)
@@ -28,7 +28,7 @@ namespace FinanceWeb.Logic
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static User GetUserById(int id)
+        public static User GetUser(int id)
         {
             using (var context = new FinanceDataContext())
             {
@@ -37,7 +37,12 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static User GetUserByUsername(string username)
+        /// <summary>
+        /// Get user by userName
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public static User GetUser(string username)
         {
             using (var context = new FinanceDataContext())
             {

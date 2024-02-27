@@ -7,6 +7,11 @@ namespace FinanceWeb.Logic
 {
     public static class PossessionLogic
     {
+        /// <summary>
+        /// Create new possession data in the possession table
+        /// </summary>
+        /// <param name="possession"></param>
+        /// <returns></returns>
         public static Possession CreatePossession(Possession possession)
         {
             using (var context = new FinanceDataContext())
@@ -17,17 +22,28 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static List<Possession> GetPossessionByAccountId(int id)
+        /// <summary>
+        /// Get possession by accountId
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
+        public static List<Possession> GetPossession(int accountId)
         {
             using (var context = new FinanceDataContext())
             {
-                var entity = context.Possession.Where(possession => possession.AccountID == id).Include(s => s.Shares).ThenInclude(s => s.ShareValue).ToList();
+                var entity = context.Possession.Where(possession => possession.AccountID == accountId).Include(s => s.Shares).ThenInclude(s => s.ShareValue).ToList();
                 context.SaveChanges();
                 return entity;
             }
         }
 
-        public static Possession GetPossessionByShareId(int shareId, int accountId)
+        /// <summary>
+        /// Get possession by shareId
+        /// </summary>
+        /// <param name="shareId"></param>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
+        public static Possession GetPossession(int shareId, int accountId)
         {
             using (var context = new FinanceDataContext())
             {
@@ -37,7 +53,13 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static void UpdateNumberByShareId(int newNumber ,int shareId, int accountId)
+        /// <summary>
+        /// Update amount in database for one possession
+        /// </summary>
+        /// <param name="newNumber"></param>
+        /// <param name="shareId"></param>
+        /// <param name="accountId"></param>
+        public static void UpdateAmount(int newNumber ,int shareId, int accountId)
         {
             using (var context = new FinanceDataContext())
             {
@@ -47,6 +69,10 @@ namespace FinanceWeb.Logic
             }
         }
 
+        /// <summary>
+        /// Delete possession in database
+        /// </summary>
+        /// <param name="possession"></param>
         public static void DeletePossession(Possession possession)
         {
             using (var context = new FinanceDataContext())
@@ -54,11 +80,6 @@ namespace FinanceWeb.Logic
                 context.Possession.Remove(possession);
                 context.SaveChanges();
             }
-        }
-
-        public static void Sell()
-        {
-
         }
     }
 }

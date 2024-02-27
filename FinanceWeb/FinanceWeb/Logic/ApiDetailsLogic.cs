@@ -6,7 +6,12 @@ namespace FinanceWeb.Logic
 {
     public static class ApiDetailsLogic
     {
-        public static ApiDetails GetApiDetailsById(int id)
+        /// <summary>
+        /// Get api details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static ApiDetails GetApiDetails(int id)
         {
             using (var context = new FinanceDataContext())
             {

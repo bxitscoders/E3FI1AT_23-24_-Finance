@@ -7,7 +7,7 @@ namespace FinanceWeb.Logic
     public static class AccountLogic
     {
         /// <summary>
-        /// Create an account in Database
+        /// Create an account in 
         /// </summary>
         /// <param name="account"></param>
         public static void CreateAccount(Account account)
@@ -24,7 +24,7 @@ namespace FinanceWeb.Logic
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        public static Account GetAccountByUserId(int userId)
+        public static Account GetAccount(int userId)
         {
             using (var context = new FinanceDataContext())
             {
@@ -33,7 +33,12 @@ namespace FinanceWeb.Logic
             }
         }
 
-        public static int GetAccountCreditByUserId(int userId)
+        /// <summary>
+        /// Get credit from account by userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static int GetAccountCredit(int userId)
         {
             using (var context = new FinanceDataContext())
             {

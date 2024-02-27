@@ -41,7 +41,7 @@ namespace FinanceWeb.Logic
             }
             else
             {
-                shareId = SharesLogic.GetShareIdByName(metaData["symbol"].ToString());
+                shareId = SharesLogic.GetShareId(metaData["symbol"].ToString());
             }
 
             var value = (int)Math.Floor(decimal.Parse(metaData["regularMarketPrice"].ToString()));

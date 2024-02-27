@@ -22,7 +22,7 @@ namespace UnitTests.DatabaseTests
         public void GetUserTest()
         {
             int id = 15;
-            User user = UserLogic.GetUserById(id);
+            User user = UserLogic.GetUser(id);
             Assert.True(id == user.ID);
         }
 

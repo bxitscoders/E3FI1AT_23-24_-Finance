@@ -10,7 +10,7 @@ namespace FinanceWeb.Logic
     public static class FinanceTransactionLogic
     {
         /// <summary>
-        /// Create a new financeTransaction in database
+        /// Create a new financeTransaction data in the financetransaction table
         /// </summary>
         /// <param name="transactionType"></param>
         /// <param name="ammount"></param>

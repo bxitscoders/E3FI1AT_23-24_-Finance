@@ -12,9 +12,9 @@ namespace FinanceWeb.Controllers
         }
         public IActionResult VerifyLogin(string username)
         {
-            User user = UserLogic.GetUserByUsername(username);
+            User user = UserLogic.GetUser(username);
             GlobalContext.User = user;
-            GlobalContext.Credit = AccountLogic.GetAccountCreditByUserId(user.ID);
+            GlobalContext.Credit = AccountLogic.GetAccountCredit(user.ID);
             if (user != null)
                 return RedirectToAction("Index", "Home");
             else
